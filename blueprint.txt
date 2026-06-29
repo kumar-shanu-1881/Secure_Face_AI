@@ -1,0 +1,149 @@
+🏗️ PROJECT BLUEPRINT: SecureFace AI (Scalable Backend)
+🛠️ 1. The Technology Stack
+This stack is chosen for its balance of high-performance machine learning and scalable web-server architecture.
+
+Core Language: Python 3.10+
+
+Web Framework: Flask (Modular with Blueprints & Application Factory)
+
+Machine Learning & Vision: * insightface (ArcFace for 512D Face Embeddings)
+
+onnxruntime (MiniFASNet for Anti-Spoofing / Liveness)
+
+opencv-python (Image processing and bounding boxes)
+
+Databases:
+
+Relational DB: SQLite (Development) / PostgreSQL (Production) via Flask-SQLAlchemy (ORM)
+
+Vector DB: Qdrant (Local file mode for Dev / Docker for Production) via qdrant-client
+
+Security & Utilities:
+
+PyJWT (JSON Web Tokens for secure session management)
+
+werkzeug.security (Scrypt password hashing)
+
+numpy (High-speed matrix math for vector comparisons)
+
+📂 2. Scalable Folder Architecture
+This structure separates concerns, making it easy to swap databases, update AI models, or add new API endpoints without breaking the system.
+
+Plaintext
+face_auth_backend/
+│
+├── app/                        # Main Application Package
+│   ├── __init__.py             # Application Factory & Extension Init
+│   │
+│   ├── api/                    # 🌐 API ROUTING LAYER
+│   │   ├── __init__.py
+│   │   ├── auth_routes.py      # POST /register, POST /login
+│   │   └── admin_routes.py     # GET /users, GET /logs
+│   │
+│   ├── core/                   # 🧠 AI & BUSINESS LOGIC LAYER
+│   │   ├── __init__.py
+│   │   ├── face_extractor.py   # InsightFace integration
+│   │   └── liveness_check.py   # ONNX Anti-spoofing integration
+│   │
+│   ├── db/                     # 💾 DATA ACCESS LAYER
+│   │   ├── __init__.py
+│   │   ├── relational_db.py    # SQLAlchemy Models (Users, AuthLogs)
+│   │   └── vector_db.py        # Qdrant client (Upsert, Search embeddings)
+│   │
+│   └── utils/                  # 🧰 HELPER FUNCTIONS
+│       ├── __init__.py
+│       ├── image_helpers.py    # Base64 decoding & validation
+│       └── security.py         # JWT generation and decorators
+│
+├── instance/                   # Local databases (secureface.db, Qdrant files)
+├── models/                     # Pre-trained ML weights (.onnx files)
+├── config.py                   # Environment Configurations (Dev, Test, Prod)
+├── requirements.txt            # Python dependencies
+└── run.py                      # Application Entry Point
+🚀 3. Development Stages (The Roadmap)
+Do not try to build this all at once. Follow these stages sequentially. Do not move to the next stage until the current one works perfectly.
+
+
+
+
+Stage 1: The Foundation (Environment & Config)
+Goal: Get a basic web server running with a configuration file.
+
+Tasks:
+
+Create the virtual environment and install Flask.
+
+Write config.py.
+
+Write the Application Factory in app/__init__.py.
+
+Write run.py and test the /health endpoint.
+
+
+
+
+Stage 2: The Data Layer (Storage Setup)
+Goal: Create the tables and collections where data will live.
+
+Tasks:
+
+Install flask-sqlalchemy and qdrant-client.
+
+Write app/db/relational_db.py to define the User and AuthLog tables.
+
+Write app/db/vector_db.py to initialize the Qdrant local client and create a collection with a 512-dimension size and Cosine distance metric.
+
+Run a script to auto-generate the SQLite .db file in your instance/ folder.
+
+
+
+
+Stage 3: The Core AI Layer (The Brain)
+Goal: Wrap your machine learning scripts into clean, reusable Python classes.
+
+Tasks:
+
+Install insightface and opencv-python.
+
+Write app/core/face_extractor.py. Create a class that loads the model once and has a method get_embedding(image_path).
+
+Write app/core/liveness_check.py. Add the MiniFASNet model to detect if the image is a real person or a spoof.
+
+Test these scripts completely independent of Flask using a dummy image.
+
+
+
+
+Stage 4: The Web API Layer (Putting it together)
+Goal: Connect the outside world (Frontend/Mobile apps) to your AI and Databases.
+
+Tasks:
+
+Write app/utils/image_helpers.py to convert incoming Base64 strings into actual images.
+
+Write app/api/auth_routes.py (The Registration Route).
+
+Flow: Receive JSON -> Decode Image -> Extract Faceprint -> Save User to SQLite -> Save Faceprint to Qdrant -> Return Success.
+
+Write the Login Route.
+
+Flow: Receive JSON -> Decode Image -> Run Liveness Check (Abort if spoof) -> Extract Faceprint -> Search Qdrant for a match -> Log attempt in SQLite -> Return JWT Token.
+
+
+
+
+Stage 5: Security & Production Polish
+Goal: Make it bulletproof and ready for the real world.
+
+Tasks:
+
+Implement JWT Token verification decorators (e.g., @jwt_required) for secure routes.
+
+Hash all passwords using werkzeug.security.
+
+Write a Dockerfile to containerize the application.
+
+Swap out the local SQLite database for a proper PostgreSQL database instance.
+
+
+

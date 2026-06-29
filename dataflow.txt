@@ -1,0 +1,35 @@
+The "first" data flow in any biometric system is the Enrollment (Registration) Flow. Before your system can authenticate anyone, it has to securely learn what they look like and store their data across your two databases.
+
+If you get this data flow wrong, your SQL database and your Vector database will become out of sync, and users will never be able to log in.
+
+Here is the exact step-by-step data journey from the moment a new user clicks "Register" on the frontend to the moment their data is safely locked in the backend.
+
+The Enrollment Data Flow
+1. The Frontend Payload (Client)
+The user types in their email and password, looks into the camera, and clicks "Register". The frontend captures a single frame, resizes it, and compresses it into a Base64 string.
+
+Data State: A JSON object containing email, password, and image_base64.
+
+2. The API Gateway (Flask POST /register)
+Your Flask server receives the JSON. It immediately hashes the password using werkzeug.security for safe storage. It then decodes the Base64 string back into raw bytes so OpenCV can read it.
+
+Data State: Python variables (email_str, hashed_pw_str, image_bytes).
+
+3. The AI Core (InsightFace Extraction)
+The Flask route passes the image bytes to your FaceExtractor singleton. The AI verifies there is exactly 1 face, aligns it, and extracts the biometric features.
+
+Data State: A 512-dimension Python list of floats (the Vector).
+
+4. The Database Split (The Most Critical Step)
+Your backend now holds user credentials and a face vector, but they must be stored separately.
+
+Flask generates a unique vector_id (a UUID).
+
+Route A (Relational DB): Flask saves the email, hashed_password, and the vector_id into SQLite/PostgreSQL.
+
+Route B (Vector DB): Flask sends the actual 512D list and the exact same vector_id to Qdrant.
+
+Why? Because now, your secure SQL database acts as the master ledger, and Qdrant acts purely as a spatial calculator.
+
+5. The Response
+Both databases confirm successful writes. Flask returns a 201 Created status to the frontend, indicating the user is now enrolled.
