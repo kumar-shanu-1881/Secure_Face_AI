@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}"> -->
+    <link rel="stylesheet" href="../static/css/register.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-left">
+            <h2>Face Registration</h2>
+
+            <div class="camera-box">
+                <video id="webcam" autoplay playsinline></video>
+            </div>
+
+            <p class="note">
+                Please ensure your face is well-lit and centered.
+            </p>
+
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="box-right">
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+
+                <button type="submit">
+                    Capture Face & Register
+                </button>
+
+            </form>
+            <div id="statusmessage"></div>
+        </div>
+    </div>
+    <!-- <script src="{{ url_for('static', filename='js/register.js') }}"></script> -->
+    <script src="../static/js/register.js"></script>
+</body>
+
+</html>

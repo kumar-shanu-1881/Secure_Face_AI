@@ -22,6 +22,8 @@ class Detect_face:
                 print("Can't receive frame (stream end?). Exiting ...")
                 break
 
+            clean_frame=frame.copy()
+
             #Process the frame for face detection
             gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
             faces = self.face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=8, minSize=(30, 30))
@@ -30,14 +32,28 @@ class Detect_face:
             for (x, y, w, h) in faces:
                 cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
 
+            # Display frame
+            cv.imshow('Detector Screen', frame)
+
             #Validate face count logic
             is_valid = self._validate_face_count(len(faces))
             
-            if is_valid: return True
+            if is_valid: 
+                # return True
 
-            # Display frame
-            cv.imshow('Detector Screen', frame)
-            
+                print("\n[SUCCESS] Capturing Image!")
+                
+                # Save the full clean frame
+                cv.imwrite("captured_full_frame.jpg", clean_frame)
+                
+                # Crop the face and save it separately
+                x, y, w, h = faces[0]
+                cropped_face = clean_frame[y:y+h, x:x+w]
+                cv.imwrite("captured_cropped_face.jpg", cropped_face)
+                
+                print("-> Saved 'captured_full_frame.jpg'")
+                print("-> Saved 'captured_cropped_face.jpg'")
+
             if cv.waitKey(1) == ord('q'):
                 break
 
