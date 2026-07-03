@@ -1,11 +1,19 @@
 import cv2 as cv
+import mediapipe as mp
+
 
 class Detect_face:
     def __init__(self, camera_index=0):
-        #Initialize the cap object(camera) haarcascademodel 
         self.cap = cv.VideoCapture(camera_index)
-        self.face_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
         self.last_status = None  # Tracks status changes to avoid flooding the terminal
+        
+        #Initializing mediapipeface detection model
+        self.mp_face_detection = mp.solutions.face_detection
+
+        self.detector = self.mp_face_detection.FaceDetection(
+            model_selection=0,
+            min_detection_confidence=0.5
+        )
 
     def start_validation_stream(self):
         #Opens camera loop and validates the user face in real-time.
@@ -24,11 +32,22 @@ class Detect_face:
 
             clean_frame=frame.copy()
 
-            #Process the frame for face detection
-            gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-            faces = self.face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=8, minSize=(30, 30))
+            #Process the frame for face detection in RGB
+            rgb = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+            results = self.detector.process(rgb)
 
             #Draw bounding boxes
+            faces = []
+            if results.detections:
+                h_frame,w_frame,_=frame.shape
+                for detection in results.detections:
+                    bbox = detection.location_data.relative_bounding_box
+                    x = int(bbox.xmin * w_frame)
+                    y = int(bbox.ymin * h_frame)
+                    w = int(bbox.width * w_frame)
+                    h = int(bbox.height * h_frame)
+                    faces.append((x, y, w, h))
+
             for (x, y, w, h) in faces:
                 cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
 
