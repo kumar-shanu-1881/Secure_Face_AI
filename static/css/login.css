@@ -1,0 +1,146 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#1d386f;
+    color:rgb(226, 224, 224);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+.container{
+    width:100%;
+    max-width:1000px;
+    border-radius:12px;
+    background:#122238;
+    gap:40px;
+    display:flex;
+    box-shadow:0 10px 30px rgba(0, 0, 0, 0.934);
+    padding:30px;
+}
+.box-left,
+.box-right{
+    flex:1;
+}
+
+.box-left{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.box-left h2{
+    margin-bottom:20px;
+}
+
+.camera-box{
+    width:100%;
+    max-width:360px;
+    overflow:hidden;
+    border:4px solid #0c1bef;
+    border-radius:10px;
+}
+
+.camera-box video{
+    width:100%;
+    transform:scaleX(-1);
+    display:block;
+}
+
+.note{
+    color:#b9c0cb;
+    text-align:center;
+    margin-top:15px;
+}
+
+.box-right{
+    display:flex;
+    align-items:center;
+}
+
+form{
+    width:100%;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    background:#43546c;
+    color:white;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border:2px solid #4f46e5;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#068d97;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+button:hover{
+    background:#3d31c0;
+}
+
+
+#statusMessage{
+    margin-top:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+canvas{
+    display:none;
+}
+
+@media(max-width:768px){
+
+.container{
+    flex-direction:column;
+}
+
+}
+
+.login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #646e83;
+        }
+
+        .login-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
