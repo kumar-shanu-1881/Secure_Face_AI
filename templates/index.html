@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureFace AI</title>
+    <style type="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"></style>
+    </head>
+<body>
+
+    <header>
+        <div class="logo">AppLogo</div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </nav>
+        <a href="#signup" class="cta-button-small">Get Started</a>
+    </header>
+
+    <section id="hero">
+        <div class="hero-text">
+            <h1>Solve [User's Main Problem] with [App Name]</h1>
+            <p>The easiest way to achieve [desired outcome] without the usual hassle. Join 10,000+ happy users today.</p>
+            <a href="#download" class="cta-button-large">Download Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="app-mockup.png" alt="Preview of the App Interface">
+        </div>
+    </section>
+
+    <section id="features">
+        <h2>Why Choose [App Name]?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>⚡ Lightning Fast</h3>
+                <p>Designed for speed so you can get things done in seconds, not hours.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔒 Secure Data</h3>
+                <p>Bank-level encryption ensures your personal information never leaks.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 Works Anywhere</h3>
+                <p>Seamlessly sync across your phone, tablet, and desktop.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>What Our Users Say</h2>
+        <blockquote>
+            "This app completely changed how I manage my daily routine. Highly recommended!"
+            <cite>- Jane Doe, Early Adopter</cite>
+        </blockquote>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Your App Name. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+        </div>
+    </footer>
+
+    <!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
+</body>
+</html>
