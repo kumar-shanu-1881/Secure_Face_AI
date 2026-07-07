@@ -1,0 +1,3 @@
+[2026-07-07 21:43:56] Registration Crash: 'NoneType' object has no attribute 'tolist'
+[2026-07-07 21:43:56] Registration Crash: 'NoneType' object has no attribute 'tolist'
+[2026-07-07 21:43:57] Registration Crash: 'NoneType' object has no attribute 'tolist'

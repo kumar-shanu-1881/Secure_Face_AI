@@ -4,7 +4,6 @@ const form = document.querySelector("#registerForm");
 const statusMsg = document.querySelector("#statusMessage");
 const registerBtn = document.querySelector("#registerBtn");
 let faceDetected = false;
-let latestcroppedface = null;
 
 // Start Webcam
 navigator.mediaDevices.getUserMedia({
@@ -12,7 +11,10 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream => {
     video.srcObject = stream;
-    setInterval(detect, 150); // Call detectFace every 150ms
+    // setInterval(detectFace, 150); // Call detectFace every 150ms
+    video.onloadedmetadata = () => {
+        detectFace(); // Start the loop manually once
+    };
 })
 .catch(err => {
     alert("Access to Camera Denied.");
@@ -52,13 +54,11 @@ async function detectFace(){
                 registerBtn.disabled = false;
                 statusMsg.style.color = "lightgreen";
                 statusMsg.innerHTML = "✅ " + data.message;
-                latestcroppedface = data.cropped_face;
                 
             } else{
                 faceDetected = false;
                 registerBtn.disabled = true;
                 
-                latestcroppedface = null;
                 statusMsg.style.color = "red";
 
                 statusMsg.innerHTML = "❌ " + data.message;
@@ -69,6 +69,11 @@ async function detectFace(){
 
             console.log(err);
 
+        }
+        finally {
+            // CRITICAL: Schedule the next frame ONLY after this one finishes (or fails)
+            // This prevents network queue flooding
+            setTimeout(detectFace, 150);
         }
 
     }, "image/jpeg");
@@ -93,22 +98,23 @@ form.addEventListener("submit", async function(e){
         return;
     }
     
-    // canvas.width = video.videoWidth;
-    // canvas.height = video.videoHeight;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
 
-    // const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-    // ctx.drawImage(video,0,0,canvas.width,canvas.height);
+    ctx.drawImage(video,0,0,canvas.width,canvas.height);
 
-    // const imageBase64 = canvas.toDataURL("image/jpeg");
 
-    const payload = {
+    canvas.toBlob(async (blob) =>{
+        const formData = new FormData();
+        formData.append("full_name", document.querySelector("#fullName").value);
+        formData.append("email", document.querySelector("#email").value);
+        formData.append("password", document.querySelector("#password").value);
+        
+        // Append the blob and give it a fake filename ("face.jpg")
+        formData.append("image", blob, "face.jpg");
 
-        full_name:document.querySelector("#fullName").value,
-        email:document.querySelector("#email").value,
-        password:document.querySelector("#password").value,
-        image:latestcroppedface // Use the latest cropped face image
-    };
 
     try{
 
@@ -116,11 +122,7 @@ form.addEventListener("submit", async function(e){
 
             method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify(payload)
+            body:formData
 
         });
 
@@ -153,5 +155,6 @@ form.addEventListener("submit", async function(e){
         statusMsg.innerHTML="Network Error.";
 
     }
+},"image/jpeg",0.99);
 
 });

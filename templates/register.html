@@ -18,9 +18,10 @@
                 <video id="webcam" autoplay playsinline></video>
             </div>
 
-            <p class="note">
+            <div id="statusMessage"></div>
+            <!-- <p class="note">
                 Please ensure your face is well-lit and centered.
-            </p>
+            </p> -->
 
             <canvas id="canvas"></canvas>
         </div>
@@ -47,7 +48,6 @@
                 </button>
 
             </form>
-            <div id="statusmessage"></div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/register.js') }}"></script>

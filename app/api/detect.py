@@ -5,7 +5,7 @@ from app.core.face_detector import Detect_face
 
 detect_bp = Blueprint("detect", __name__)
 
-detect_bp.route("/api/detect", methods=["POST"])
+@detect_bp.route("/detect", methods=["POST"])
 def detect():
 
     file = request.files["frame"]
