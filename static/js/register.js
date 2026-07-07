@@ -4,7 +4,7 @@ const form = document.querySelector("#registerForm");
 const statusMsg = document.querySelector("#statusMessage");
 const registerBtn = document.querySelector("#registerBtn");
 let faceDetected = false;
-
+let latestcroppedface = null;
 
 // Start Webcam
 navigator.mediaDevices.getUserMedia({
@@ -12,7 +12,7 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream => {
     video.srcObject = stream;
-    setInterval(detectFace, 150); // Call detectFace every 150ms
+    setInterval(detect, 150); // Call detectFace every 150ms
 })
 .catch(err => {
     alert("Access to Camera Denied.");
@@ -52,11 +52,13 @@ async function detectFace(){
                 registerBtn.disabled = false;
                 statusMsg.style.color = "lightgreen";
                 statusMsg.innerHTML = "✅ " + data.message;
+                latestcroppedface = data.cropped_face;
                 
             } else{
                 faceDetected = false;
                 registerBtn.disabled = true;
-
+                
+                latestcroppedface = null;
                 statusMsg.style.color = "red";
 
                 statusMsg.innerHTML = "❌ " + data.message;
@@ -91,21 +93,21 @@ form.addEventListener("submit", async function(e){
         return;
     }
     
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    // canvas.width = video.videoWidth;
+    // canvas.height = video.videoHeight;
 
-    const ctx = canvas.getContext("2d");
+    // const ctx = canvas.getContext("2d");
 
-    ctx.drawImage(video,0,0,canvas.width,canvas.height);
+    // ctx.drawImage(video,0,0,canvas.width,canvas.height);
 
-    const imageBase64 = canvas.toDataURL("image/jpeg");
+    // const imageBase64 = canvas.toDataURL("image/jpeg");
 
     const payload = {
 
         full_name:document.querySelector("#fullName").value,
         email:document.querySelector("#email").value,
         password:document.querySelector("#password").value,
-        image:imageBase64
+        image:latestcroppedface // Use the latest cropped face image
     };
 
     try{

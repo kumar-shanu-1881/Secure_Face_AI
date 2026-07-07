@@ -1,12 +1,11 @@
-import pandas as pd
 import numpy as np
 import cv2
-from flask import Flask, request, jsonify
-from face_detector import detector
+from flask import Blueprint, request, jsonify
+from app.core.face_detector import Detect_face
 
-app=Flask(__name__)
+detect_bp = Blueprint("detect", __name__)
 
-@app.route("/detect", methods=["POST"])
+detect_bp.route("/api/detect", methods=["POST"])
 def detect():
 
     file = request.files["frame"]
@@ -15,6 +14,8 @@ def detect():
 
     frame = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
+    detector = Detect_face()
+    
     result = detector.detect(frame)
 
     if result["success"]:
@@ -24,6 +25,8 @@ def detect():
         return jsonify({
 
             "success": True,
+            
+            "face":True,
 
             "message": result["message"],
 
@@ -34,7 +37,8 @@ def detect():
     return jsonify({
 
         "success": False,
-
+        "face":True,
         "message": result["message"]
 
     })
+

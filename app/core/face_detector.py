@@ -72,6 +72,7 @@ class Detect_face:
         faces = []
         h_frame,w_frame,_=frame.shape
         is_forward = False
+        forward_faces_count = 0
         if results.detections:
                 for detection in results.detections:
                     bbox = detection.location_data.relative_bounding_box
@@ -84,7 +85,8 @@ class Detect_face:
                     faces.append((x, y, w, h))
 
                     is_forward = self._is_looking_forward(detection)
-
+                    if(is_forward):
+                        forward_faces_count += 1
         
         if len(faces) == 0:
 
@@ -104,7 +106,7 @@ class Detect_face:
                 "cropped_face": None
             }
 
-        if not is_forward:
+        if not is_forward and forward_faces_count == 0:
 
             return {
                 "success": False,
@@ -135,5 +137,5 @@ class Detect_face:
 
 #To run tthe class
 if __name__ == "__main__":
-    detector = Detect_face(camera_index=0)
+    detector = Detect_face()
     detector.start_validation_stream()

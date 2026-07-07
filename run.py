@@ -1,10 +1,24 @@
-from flask import Flask
-from database import db
+from flask import Flask, render_template , Response
+# import app.api.detect as detect_api
+# import app.api.register as register_api
+# from app import create_app
+from __init__ import create_app
 
-app = Flask(__name__)
+app=create_app()
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///secureface.db"
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db.init_app(app)
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+
+@app.route("/login")
+def login():
+    return render_template("dashboard.html")
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

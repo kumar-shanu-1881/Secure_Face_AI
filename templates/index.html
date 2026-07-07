@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureFace AI</title>
-    <style type="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"></style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
     </head>
 <body>
 
     <header>
         <div class="logo">AppLogo</div>
         <nav>
-            <a href="#features">Features</a>
+            <!-- <a href="#features">Features</a>
             <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact">Contact</a> -->
             <a href="{{ url_for('register') }}">Register</a>
         </nav>
         <a href="#signup" class="cta-button-small">Get Started</a>
