@@ -94,7 +94,7 @@ class Detect_face:
                 "success": False,
                 "message": "No face detected.",
                 "faces": [],
-                "cropped_face": None
+                "face": None
             }
 
         if len(faces) > 1:
@@ -103,7 +103,7 @@ class Detect_face:
                 "success": False,
                 "message": "Multiple faces detected.",
                 "faces": faces,
-                "cropped_face": None
+                "face": None
             }
 
         if not is_forward and forward_faces_count == 0:
@@ -112,14 +112,14 @@ class Detect_face:
                 "success": False,
                 "message": "Please look straight at the camera.",
                 "faces": faces,
-                "cropped_face": None
+                "face": None
             }
         
         x, y, w, h = faces[0]
         x = max(0, x)
         y = max(0, y)
 
-        cropped_face = frame[y:y+h, x:x+w]
+        
 
         return {
 
@@ -129,7 +129,7 @@ class Detect_face:
 
             "faces": faces,
 
-            "cropped_face": cropped_face,
+            "face": rgb,
 
             "bbox": (x, y, w, h)
         }

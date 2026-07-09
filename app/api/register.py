@@ -3,10 +3,10 @@ import numpy as np
 import cv2
 import uuid
 from app.core.face_detector import Detect_face
+from app.core.get_embedings import get_embedder
 from datetime import datetime
 from app.db.user_repo import user_repo
 from flask import Blueprint, request, jsonify
-from app.core.get_embedings import get_embedder
 from werkzeug.security import generate_password_hash
 
 register_bp = Blueprint("register", __name__)
@@ -46,7 +46,7 @@ def register():
         #convert the image into face embeddings using the face recognition model
         embedder = get_embedder
         # print(type(image))
-        embedding = embedder.get_embedding(result['cropped_face'])
+        embedding = embedder.get_embedding(result['face'])
 
         user={
             'user_id': user_id,
