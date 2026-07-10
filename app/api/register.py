@@ -69,25 +69,27 @@ def register():
             "user_id": user_id
         }), 201
 
-    except Exception as e:
-        # return jsonify({"error": str(e)}), 400
-
-        error_msg = str(e)
-        print(f"Registration Error: {error_msg}") 
-        
-        # 2. Append the error and timestamp to a physical log file
-        try:
-            with open("error_log.txt", "a", encoding="utf-8") as log_file:
-                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                log_file.write(f"[{timestamp}] Registration Crash: {error_msg}\n")
-        except Exception as log_error:
-            print(f"Failed to write to log file: {log_error}")
-
-        # 3. Send the response back to the JavaScript frontend
-        return jsonify({"success": False, "message": error_msg}), 400
     # except Exception as e:
-    #     print(f"Registration Error: {str(e)}") 
-    #     return jsonify({"success": False, "message": str(e)}), 400 # <-- Changed "error" to "message"
+    #     # return jsonify({"error": str(e)}), 400
+
+    #     error_msg = str(e)
+    #     print(f"Registration Error: {error_msg}") 
+        
+    #     # 2. Append the error and timestamp to a physical log file
+    #     try:
+    #         with open("error_log.txt", "a", encoding="utf-8") as log_file:
+    #             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    #             log_file.write(f"[{timestamp}] Registration Crash: {error_msg}\n")
+    #     except Exception as log_error:
+    #         print(f"Failed to write to log file: {log_error}")
+
+    #     # 3. Send the response back to the JavaScript frontend
+    #     return jsonify({"success": False, "message": error_msg}), 400
+
+    
+    except Exception as e:
+        print(f"Registration Error: {str(e)}") 
+        return jsonify({"success": False, "message": str(e)}), 400
     
     
 
