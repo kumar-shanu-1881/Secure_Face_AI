@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"> -->
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <!-- <link rel="stylesheet" href="../static/css/login.css"> -->
 </head>
 
 <body>
@@ -18,9 +18,10 @@
                 <video id="webcam" autoplay playsinline></video>
             </div>
 
-            <p class="note">
+            <div id="statusmessage"></div>
+            <!-- <p class="note">
                 Please ensure your face is well-lit and centered.
-            </p>
+            </p> -->
 
             <canvas id="canvas"></canvas>
         </div>
@@ -49,12 +50,12 @@
             Don't have an account? <a href="{{ url_for('register') }}">Sign up</a>
         </div>
             </form>
-            <div id="statusmessage"></div>
         </div>
         
     </div>
-    <!-- <script src="{{ url_for('static', filename='js/login.js') }}"></script> -->
-    <script src="../static/js/login.js"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <!-- <script src="../static/js/login.js"></script> -->
 </body>
 
+5
 </html>

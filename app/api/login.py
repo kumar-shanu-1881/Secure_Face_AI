@@ -2,9 +2,10 @@ import numpy as np
 import cv2
 from app.core.face_detector import Detect_face
 from app.core.get_embedings import get_embedder
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,render_template
 from werkzeug.security import check_password_hash
 from app.db.user_repo import user_repo
+from app.core.check_similarity import compare_faces
 
 login_bp=Blueprint('login',__name__)
 @login_bp.route("api/login",methods=["POST"])
@@ -12,9 +13,11 @@ login_bp=Blueprint('login',__name__)
 def login():
     try:
         email=request.form.get('email')
+        user_exist=True
         # check for user exist or not
         existing_user = user_repo.get_user_by_email(email)
-        if existing_user:
+        if not existing_user:
+            user_exist=False
             return jsonify({
                 "success": False,
                 "message": "User not exists.\n Please Register user."
@@ -35,18 +38,31 @@ def login():
                 "message": "wrong password."
             }), 404
 
-        # get image from  form and process the image 
+        # get image from form and process the image 
         file=request.files['image']
         image = np.frombuffer(file.read(), np.uint8)
         frame = cv2.imdecode(image, cv2.IMREAD_COLOR)
         detector = Detect_face()
         result = detector.detect(frame)
 
-        #convert the image into face embeddings using the face recognition model
+        #convert the captured web  image into face embeddings using the face recognition model
         embedder = get_embedder
-        embedding = embedder.get_embedding(result['face'])
+        web_embedding = embedder.get_embedding(result['face']).tolist
 
-
+        # matching person face
+        is_matched,cosine_sim,euclidean_dit=compare_faces(web_embedding,data['embedding'])
+        if not is_matched:
+            return jsonify({
+                "success": False,
+                "message":"Face not Matched"
+            })
+        if is_matched and is_match and user_exist:
+            return jsonify({
+                "success":True,
+                "message":"Face matched"
+            })
+        
+        
         
 
         

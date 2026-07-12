@@ -4,6 +4,7 @@ const form = document.querySelector("#loginForm");
 const statusMsg = document.querySelector("#statusMessage");
 const loginBtn = document.querySelector("#loginBtn");
 let faceDetected = false;
+let latestBlob = null;
 
 
 // Start Webcam
@@ -12,7 +13,10 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream => {
     video.srcObject = stream;
-    setInterval(detectFace, 150); // Call detectFace every 150ms
+    // setInterval(detectFace, 150); // Call detectFace every 150ms
+    video.onloadedmetadata = () => {
+        detectFace(); // Start the loop manually once
+    };
 })
 .catch(err => {
     alert("Access to Camera Denied.");
@@ -33,6 +37,7 @@ async function detectFace(){
 
     canvas.toBlob(async (blob) => {
 
+        latestBlob=blob;
         const formData = new FormData();
         formData.append("frame", blob);
         
@@ -67,6 +72,10 @@ async function detectFace(){
 
             console.log(err);
 
+        }finally{
+             // CRITICAL: Schedule the next frame ONLY after this one finishes (or fails)
+            // This prevents network queue flooding
+            setTimeout(detectFace, 350);
         }
 
     }, "image/jpeg");
@@ -91,21 +100,20 @@ form.addEventListener("submit", async function(e){
         return;
     }
     
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(video,0,0,canvas.width,canvas.height);
-
-    const imageBase64 = canvas.toDataURL("image/jpeg");
-
-    const payload = {
-
-        email:document.querySelector("#email").value,
-        password:document.querySelector("#password").value,
-        image:imageBase64
-    };
+     if(!latestBlob){
+        statusMsg.innerHTML = "No image captured.";
+        return;
+        }
+        
+        const formData = new FormData();
+        formData.append("userid", document.querySelector("#userid").value);
+        formData.append("email", document.querySelector("#email").value);
+        formData.append("password", document.querySelector("#password").value);
+        
+        // Append the blob and give it a fake filename ("face.jpg")
+        formData.append("image", latestBlob, "face.jpg");
+        
+        capturedImageURL = URL.createObjectURL(latestBlob);
 
     try{
 
@@ -113,23 +121,23 @@ form.addEventListener("submit", async function(e){
 
             method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify(payload)
-
+            body:formData
         });
 
         const data = await response.json();
 
-        if(response.ok){
 
+        if(response.ok){
             statusMsg.style.color="lightgreen";
 
             statusMsg.innerHTML="✔ "+data.message;
 
             form.reset();
+            
+            document.querySelector("#gotoLogin").addEventListener("click", () => {
+            window.location.href = "/";
+        });
+        statusMsg.innerHTML = "";
 
         }
 
