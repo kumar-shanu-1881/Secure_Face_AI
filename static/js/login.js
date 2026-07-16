@@ -1,7 +1,7 @@
 const video = document.querySelector("#webcam");
 const canvas = document.querySelector("#canvas");
 const form = document.querySelector("#loginForm");
-const statusMsg = document.querySelector("#statusMessage");
+const statusMsg = document.querySelector("#statusmessage");
 const loginBtn = document.querySelector("#loginBtn");
 let faceDetected = false;
 let latestBlob = null;
@@ -54,13 +54,13 @@ async function detectFace(){
 
             if (data.success) {
                 faceDetected = data.face;
-                registerBtn.disabled = false;
+                loginBtn.disabled = false;
                 statusMsg.style.color = "lightgreen";
                 statusMsg.innerHTML = "✅ " + data.message;
                 
             } else{
                 faceDetected = false;
-                registerBtn.disabled = true;
+                loginBtn.disabled = true;
 
                 statusMsg.style.color = "red";
 
@@ -131,31 +131,48 @@ form.addEventListener("submit", async function(e){
             statusMsg.style.color="lightgreen";
 
             statusMsg.innerHTML="✔ "+data.message;
-
-            form.reset();
             
-            document.querySelector("#gotoLogin").addEventListener("click", () => {
-            window.location.href = "/";
-        });
+           setTimeout(() => {
+                window.location.href = "/";
+                    }, 1000);
+            form.reset();
         statusMsg.innerHTML = "";
 
         }
 
         else{
+            if (data.message === "Face not matched.") {
+        alert("❌ Face not matched.\nPlease look at the camera and try again.");
+    }
 
-            statusMsg.style.color="red";
+    else if (data.message === "Invalid User ID.") {
+        alert("❌ Invalid User ID.");
+    }
 
-            statusMsg.innerHTML="✖ "+data.message;
+    else if (data.message === "Email does not exist.") {
+        alert("❌ Email not found.\nPlease register first.");
+    }
+
+    else if (data.message === "Wrong password.") {
+        alert("❌ Incorrect password.");
+    }
+
+    else {
+        alert(data.message);
+    }
+
+    statusMsg.style.color = "red";
+    statusMsg.innerHTML = "✖ " + data.message;
+}
 
         }
 
-    }
 
     catch(error){
+         console.error("Login Error:", error);
 
-        statusMsg.style.color="red";
-
-        statusMsg.innerHTML="Network Error.";
+    statusMsg.style.color = "red";
+    statusMsg.innerHTML = "Network Error";
 
     }
 

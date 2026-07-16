@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SecureFace AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🔒 SecureFace AI
+        </div>
+
+        <div class="nav-right">
+
+            <span>Welcome, {{ user.full_name }}</span>
+
+            <a href="/logout" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- Main Dashboard -->
+
+    <div class="dashboard">
+
+        <!-- Left Side -->
+
+        <div class="left-panel">
+
+            <!-- Profile Card -->
+
+            <div class="card profile-card">
+
+                <img src="{{ user.profile_image }}" alt="Profile">
+
+                <h2>{{ user.full_name }}</h2>
+
+                <p><strong>User ID:</strong> {{ user.user_id }}</p>
+
+                <p><strong>Email:</strong> {{ user.email }}</p>
+
+                <p class="verified">
+                    ✅ Successfully Authenticated
+                </p>
+
+            </div>
+
+            <!-- Authentication Summary -->
+
+            <div class="card">
+
+                <h3>Authentication Summary</h3>
+
+                <ul>
+
+                    <li>✔ Face Matched</li>
+
+                    <li>✔ Password Verified</li>
+
+                    <li>✔ Anti-Spoof Passed</li>
+
+                    <li>✔ Login Successful</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+
+        <div class="right-panel">
+
+            <!-- About -->
+
+            <div class="card">
+
+                <h2>About SecureFace AI</h2>
+
+                <p>
+
+                    SecureFace AI is an intelligent face authentication
+                    system that securely verifies users using
+                    AI-powered facial recognition, password authentication,
+                    and anti-spoof detection.
+
+                </p>
+
+            </div>
+
+            <!-- Features -->
+
+            <div class="card">
+
+                <h2>Project Features</h2>
+
+                <div class="feature-grid">
+
+                    <div class="feature">
+                        📷
+                        <span>Face Registration</span>
+                    </div>
+
+                    <div class="feature">
+                        😊
+                        <span>Face Authentication</span>
+                    </div>
+
+                    <div class="feature">
+                        🛡
+                        <span>Anti-Spoof Detection</span>
+                    </div>
+
+                    <div class="feature">
+                        🔐
+                        <span>Password Hashing</span>
+                    </div>
+
+                    <div class="feature">
+                        ☁
+                        <span>MongoDB Atlas</span>
+                    </div>
+
+                    <div class="feature">
+                        ⚡
+                        <span>Real-Time Processing</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Technology -->
+
+            <div class="card">
+
+                <h2>Technology Stack</h2>
+
+                <table>
+
+                    <tr>
+
+                        <td>Frontend</td>
+
+                        <td>HTML, CSS, JavaScript</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Backend</td>
+
+                        <td>Python, Flask</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Database</td>
+
+                        <td>MongoDB Atlas</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Face Detection</td>
+
+                        <td>MediaPipe</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Face Recognition</td>
+
+                        <td>InsightFace (Buffalo_SC)</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Computer Vision</td>
+
+                        <td>OpenCV</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Embedding Matching</td>
+
+                        <td>Cosine Similarity + Euclidean Distance</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Security</td>
+
+                        <td>Scrypt Password Hashing</td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <!-- Workflow -->
+
+            <div class="card">
+
+                <h2>Authentication Workflow</h2>
+
+                <div class="workflow">
+
+                    <div>📷<br>Capture Face</div>
+
+                    <div>➡</div>
+
+                    <div>😊<br>Face Detection</div>
+
+                    <div>➡</div>
+
+                    <div>🧠<br>Generate Embeddings</div>
+
+                    <div>➡</div>
+
+                    <div>📊<br>Compare Embeddings</div>
+
+                    <div>➡</div>
+
+                    <div>✅<br>Authenticated</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

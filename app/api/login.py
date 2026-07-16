@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import numpy as np 
 import cv2
 from app.core.face_detector import Detect_face
@@ -8,7 +10,7 @@ from app.db.user_repo import user_repo
 from app.core.check_similarity import compare_faces
 
 login_bp=Blueprint('login',__name__)
-@login_bp.route("api/login",methods=["POST"])
+@login_bp.route("/api/login",methods=["POST"])
 
 def login():
     try:
@@ -26,6 +28,11 @@ def login():
         userid=request.form.get('userid')
         # get user data from database
         data=user_repo.get_user_by_user_id(userid)
+        if not data:
+            return jsonify({
+                "success": False,
+                "message": "Invalid User ID."
+                }), 404
         
         password=request.form.get('password')
 
@@ -36,7 +43,7 @@ def login():
             return jsonify({
                 "success": False,
                 "message": "wrong password."
-            }), 404
+            }), 401
 
         # get image from form and process the image 
         file=request.files['image']
@@ -45,9 +52,15 @@ def login():
         detector = Detect_face()
         result = detector.detect(frame)
 
+        if not result or "face" not in result:
+            return jsonify({
+                "success": False,
+                "message": "Face not detected."
+                }),400
+
         #convert the captured web  image into face embeddings using the face recognition model
         embedder = get_embedder
-        web_embedding = embedder.get_embedding(result['face']).tolist
+        web_embedding = embedder.get_embedding(result['face']).tolist()
 
         # matching person face
         is_matched,cosine_sim,euclidean_dit=compare_faces(web_embedding,data['embedding'])
@@ -55,7 +68,7 @@ def login():
             return jsonify({
                 "success": False,
                 "message":"Face not Matched"
-            })
+            }),401
         if is_matched and is_match and user_exist:
             return jsonify({
                 "success":True,
@@ -67,5 +80,17 @@ def login():
 
         
     except Exception as e:
-        print(f"Login Error: {str(e)}") 
         return jsonify({"success": False, "message": str(e)}), 400 
+    # except Exception as e:
+    #     # return jsonify({"error": str(e)}), 400
+
+    #     error_msg = str(e)
+    #     print(f"Registration Error: {error_msg}") 
+        
+    #     # 2. Append the error and timestamp to a physical log file
+    #     try:
+    #         with open("error_log.txt", "a", encoding="utf-8") as log_file:
+    #             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    #             log_file.write(f"[{timestamp}] Registration Crash: {error_msg}\n")
+    #     except Exception as log_error:
+    #         print(f"Failed to write to log file: {log_error}")

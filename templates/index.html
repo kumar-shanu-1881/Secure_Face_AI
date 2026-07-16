@@ -4,67 +4,280 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureFace AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
-    </head>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> -->
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
 <body>
 
-    <header>
-        <div class="logo">AppLogo</div>
-        <nav>
-            <!-- <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a> -->
-            <a href="{{ url_for('register') }}">Register</a>
-        </nav>
-        <a href="#signup" class="cta-button-small">Get Started</a>
-    </header>
+    <!-- ================= NAVBAR ================= -->
 
-    <section id="hero">
-        <div class="hero-text">
-            <h1>Solve [User's Main Problem] with [App Name]</h1>
-            <p>The easiest way to achieve [desired outcome] without the usual hassle. Join 10,000+ happy users today.</p>
-            <a href="#download" class="cta-button-large">Download Now</a>
+    <nav class="navbar">
+
+        <div class="logo">
+            🔒 SecureFace AI
         </div>
-        <div class="hero-image">
-            <img src="app-mockup.png" alt="Preview of the App Interface">
+
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="/login" class="login-btn">Login</a>
+            <a href="/register" class="register-btn">Register</a>
         </div>
+
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <h1>AI-Powered Face Authentication</h1>
+
+            <p>
+                SecureFace AI is an intelligent facial authentication system
+                that combines face recognition, anti-spoof detection and
+                password verification for secure access.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/register" class="primary-btn">
+                    Get Started
+                </a>
+
+                <a href="#about" class="secondary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="{{ url_for('static', filename='images/face_ai.png') }}"
+                 alt="SecureFace AI">
+
+        </div>
+
     </section>
 
-    <section id="features">
-        <h2>Why Choose [App Name]?</h2>
+
+    <section id="features" class="features">
+
+        <h2>Core Features</h2>
+
         <div class="feature-grid">
-            <div class="feature-card">
-                <h3>⚡ Lightning Fast</h3>
-                <p>Designed for speed so you can get things done in seconds, not hours.</p>
+
+            <div class="card">
+                <h3>📷 Face Registration</h3>
+
+                <p>
+                    Register users by capturing facial embeddings securely.
+                </p>
             </div>
-            <div class="feature-card">
-                <h3>🔒 Secure Data</h3>
-                <p>Bank-level encryption ensures your personal information never leaks.</p>
+
+            <div class="card">
+
+                <h3>😊 Face Authentication</h3>
+
+                <p>
+                    Authenticate users using deep facial embeddings.
+                </p>
+
             </div>
-            <div class="feature-card">
-                <h3>📱 Works Anywhere</h3>
-                <p>Seamlessly sync across your phone, tablet, and desktop.</p>
+
+            <div class="card">
+
+                <h3>🛡 Anti-Spoof Detection</h3>
+
+                <p>
+                    Prevent unauthorized access using fake images or videos.
+                </p>
+
             </div>
+
+            <div class="card">
+
+                <h3>🔐 Password Security</h3>
+
+                <p>
+                    Passwords are securely encrypted using Scrypt hashing.
+                </p>
+
+            </div>
+
+            <div class="card">
+                <h3>Isolation Check and Prevent Poor Detection</h3>
+                <p>Checks frame at every 350 ms to ensure single face and user looks at front</p>
+            </div>
+
         </div>
+
     </section>
 
-    <section id="testimonials">
-        <h2>What Our Users Say</h2>
-        <blockquote>
-            "This app completely changed how I manage my daily routine. Highly recommended!"
-            <cite>- Jane Doe, Early Adopter</cite>
-        </blockquote>
+
+    <section id="workflow" class="workflow">
+
+        <h2>Authentication Workflow</h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="circle">1</div>
+
+                <h3>Capture Face</h3>
+
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+
+                <div class="circle">2</div>
+
+                <h3>Face Detection</h3>
+                
+            </div>
+            
+            <div class="arrow">→</div>
+            <div class="step">
+
+                <div class="circle">3</div>
+
+                <h3>Tell user to look camera</h3>
+                
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+
+                <div class="circle">4</div>
+
+                <h3>Generate Embeddings</h3>
+
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+
+                <div class="circle">5</div>
+
+                <h3>Authentication</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="technology" class="technology">
+
+        <h2>Technology Stack</h2>
+
+        <div class="tech-grid">
+
+            <div class="tech-card">
+                <h3>Frontend</h3>
+
+                <p>HTML</p>
+                <p>CSS</p>
+                <p>JavaScript</p>
+
+            </div>
+
+            <div class="tech-card">
+
+                <h3>Backend</h3>
+
+                <p>Flask</p>
+                <p>Python</p>
+
+            </div>
+
+            <div class="tech-card">
+
+                <h3>AI & Computer Vision</h3>
+
+                <p>InsightFace (Buffalo_SC)</p>
+                <p>MediaPipe</p>
+                <p>OpenCV</p>
+
+            </div>
+
+            <div class="tech-card">
+
+                <h3>Database</h3>
+
+                <p>MongoDB Atlas</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="about" class="about">
+
+        <h2>About SecureFace AI</h2>
+
+        <p>
+
+            SecureFace AI is an AI-based face authentication system developed
+            to provide secure user verification using facial recognition.
+
+            The system detects user at every 350 ms. 
+
+            The system generates facial embeddings using
+            <strong>InsightFace Buffalo_SC</strong>, verifies passwords using
+            <strong>Scrypt hashing</strong>, and protects against spoofing
+            attacks using an anti-spoof detection pipeline.
+
+        </p>
+
     </section>
 
     <footer>
-        <p>&copy; 2026 Your App Name. All rights reserved.</p>
+
+        <h3>SecureFace AI</h3>
+        <br>
+        
+        <p>
+            AI-Powered Face Authentication System
+        </p>
+        <br>
+        
+        
+        <p>
+            
+            Developed by <strong>Kumar Shanu</strong>
+            
+        </p>
+
         <div class="footer-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
+
+            <a href="#">GitHub</a>
+
+            <a href="#">LinkedIn</a>
+
+            <a href="#">Portfolio</a>
+
         </div>
+
+        <p class="copyright">
+
+            © 2026 SecureFace AI
+
+        </p>
+
     </footer>
 
-    <!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
 </body>
 </html>

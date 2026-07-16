@@ -199,7 +199,7 @@ form.addEventListener("submit", async function(e){
                 setTimeout(() => {
                     detectionStopped = false;
                     statusMsg.innerHTML = "";
-        }, 4000);
+                }, 4000);
     }
 
         }
