@@ -1,10 +1,8 @@
-from datetime import datetime
-
 import numpy as np 
 import cv2
 from app.core.face_detector import Detect_face
 from app.core.get_embedings import get_embedder
-from flask import Blueprint, request, jsonify,render_template
+from flask import Blueprint, request, jsonify,session
 from werkzeug.security import check_password_hash
 from app.db.user_repo import user_repo
 from app.core.check_similarity import compare_faces
@@ -70,6 +68,10 @@ def login():
                 "message":"Face not Matched"
             }),401
         if is_matched and is_match and user_exist:
+            session.permanent = True
+            session["user_id"] = data["user_id"]
+            session["full_name"] = data["full_name"]
+            session["email"] = data["email"]
             return jsonify({
                 "success":True,
                 "message":"Face matched"
@@ -94,3 +96,5 @@ def login():
     #             log_file.write(f"[{timestamp}] Registration Crash: {error_msg}\n")
     #     except Exception as log_error:
     #         print(f"Failed to write to log file: {log_error}")
+
+# def check_match():

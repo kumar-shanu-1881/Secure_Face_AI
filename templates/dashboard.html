@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | SecureFace AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+     <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
 </head>
 <body>
-
-    <!-- Navbar -->
 
     <nav class="navbar">
 
@@ -28,21 +27,19 @@
 
     </nav>
 
-    <!-- Main Dashboard -->
 
     <div class="dashboard">
 
-        <!-- Left Side -->
+
 
         <div class="left-panel">
 
-            <!-- Profile Card -->
 
             <div class="card profile-card">
 
                 <img src="{{ user.profile_image }}" alt="Profile">
 
-                <h2>{{ user.full_name }}</h2>
+                <h2 id="username">{{ user.full_name }}</h2>
 
                 <p><strong>User ID:</strong> {{ user.user_id }}</p>
 
@@ -54,7 +51,6 @@
 
             </div>
 
-            <!-- Authentication Summary -->
 
             <div class="card">
 
@@ -151,7 +147,7 @@
 
                         <td>Frontend</td>
 
-                        <td>HTML, CSS, JavaScript</td>
+                        <td>   HTML, CSS, JavaScript</td>
 
                     </tr>
 
@@ -159,7 +155,7 @@
 
                         <td>Backend</td>
 
-                        <td>Python, Flask</td>
+                        <td>   Python, Flask</td>
 
                     </tr>
 
@@ -167,7 +163,7 @@
 
                         <td>Database</td>
 
-                        <td>MongoDB Atlas</td>
+                        <td>   MongoDB Atlas</td>
 
                     </tr>
 
@@ -175,7 +171,7 @@
 
                         <td>Face Detection</td>
 
-                        <td>MediaPipe</td>
+                        <td>   MediaPipe</td>
 
                     </tr>
 
@@ -183,7 +179,7 @@
 
                         <td>Face Recognition</td>
 
-                        <td>InsightFace (Buffalo_SC)</td>
+                        <td>   InsightFace (Buffalo_SC)</td>
 
                     </tr>
 
@@ -191,7 +187,7 @@
 
                         <td>Computer Vision</td>
 
-                        <td>OpenCV</td>
+                        <td>   OpenCV</td>
 
                     </tr>
 
@@ -199,7 +195,7 @@
 
                         <td>Embedding Matching</td>
 
-                        <td>Cosine Similarity + Euclidean Distance</td>
+                        <td>   Cosine Similarity + Euclidean Distance</td>
 
                     </tr>
 
@@ -207,7 +203,7 @@
 
                         <td>Security</td>
 
-                        <td>Scrypt Password Hashing</td>
+                        <td>   Scrypt Password Hashing</td>
 
                     </tr>
 
@@ -248,6 +244,6 @@
         </div>
 
     </div>
-
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

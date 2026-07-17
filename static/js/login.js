@@ -133,7 +133,7 @@ form.addEventListener("submit", async function(e){
             statusMsg.innerHTML="✔ "+data.message;
             
            setTimeout(() => {
-                window.location.href = "/";
+                window.location.href = "/dashboard";
                     }, 1000);
             form.reset();
         statusMsg.innerHTML = "";

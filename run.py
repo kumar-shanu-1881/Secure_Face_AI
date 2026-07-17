@@ -1,7 +1,4 @@
 from flask import Flask, render_template , Response
-# import app.api.detect as detect_api
-# import app.api.register as register_api
-# from app import create_app
 from __init__ import create_app
 
 app=create_app()
