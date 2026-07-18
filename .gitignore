@@ -1,9 +1,19 @@
+# 1. Ignore Python Cache Globally (This handles all your __pycache__ folders at once)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 2. Ignore Specific App Files
+app/core/localface_detector.py
+
+# 3. Ignore Datasets & Heavy Models
 model selection/Humans
-SecureFace AI\app\core\localface_detector.py
-SecureFace AI\app\db\__pycache__
-app/api/__pycache__
-app/db/__pycache__
-SecureFace AI\test\__pycache__
-SecureFace AI\images\Celebrity Faces Dataset
+images/Celebrity Faces Dataset/
+images/
+
+# 4. Ignore Virtual Environments (like faceenv)
+faceenv/
+venv/
+env/
 
 # C:\faceenv\Scripts\Activate.ps1
