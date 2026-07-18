@@ -18,10 +18,12 @@ def create_app():
     from app.api.detect import detect_bp
     from app.api.register import register_bp
     from app.api.login import login_bp
+    from app.api.dashboard import dashboard_bp
 
 
     app.register_blueprint(detect_bp)
     app.register_blueprint(register_bp)
     app.register_blueprint(login_bp)
+    app.register_blueprint(dashboard_bp)
 
     return app

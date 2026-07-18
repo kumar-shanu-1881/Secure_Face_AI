@@ -23,7 +23,14 @@ def login():
                 "message": "User not exists.\n Please Register user."
             }), 404
         
+        
         userid=request.form.get('userid')
+        
+        if existing_user["user_id"] != userid:
+            return jsonify({
+                "success": False,
+                "message": "Email and User ID do not match."
+            }), 401
         # get user data from database
         data=user_repo.get_user_by_user_id(userid)
         if not data:
@@ -70,7 +77,7 @@ def login():
         if is_matched and is_match and user_exist:
             session.permanent = True
             session["user_id"] = data["user_id"]
-            session["full_name"] = data["full_name"]
+            session["name"] = data["name"]
             session["email"] = data["email"]
             return jsonify({
                 "success":True,
