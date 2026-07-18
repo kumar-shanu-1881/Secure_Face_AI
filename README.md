@@ -410,9 +410,9 @@ B.Tech Computer Science Engineering (AI & ML)
 
 Machine Learning & Full Stack Developer
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/kumar-shanu-1881/
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: https://www.linkedin.com/in/kumar-shanu-9219a5293/
 
 ---
 
