@@ -19,11 +19,13 @@ def create_app():
     from app.api.register import register_bp
     from app.api.login import login_bp
     from app.api.dashboard import dashboard_bp
+    from app.api.logout import logout_bp
 
 
     app.register_blueprint(detect_bp)
     app.register_blueprint(register_bp)
     app.register_blueprint(login_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(logout_bp)
 
     return app
