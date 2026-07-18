@@ -16,4 +16,8 @@ faceenv/
 venv/
 env/
 
+# 5. Ignore csv file 
+*.csv
+
+
 # C:\faceenv\Scripts\Activate.ps1
