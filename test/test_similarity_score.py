@@ -16,11 +16,10 @@ def get_embedding(image_path):
         print(f"Cannot read image file: {image_path}")
         return None
 
-    # Let your custom get_embedder handle detection and extraction directly from the raw frame
     try:
         embedding = embedder.get_embedding(frame)
         
-        # Guard against your module returning None if it fails to find a face internally
+        #if face not detected the module will return none 
         if embedding is None:
             print(f"Embedding extraction returned None (No face found by model): {image_path}")
             return None
@@ -69,9 +68,7 @@ for person in persons:
             ])
 
 
-# ==========================================================
-# DIFFERENT PERSON TEST
-# ==========================================================
+
 
 print("\n========== DIFFERENT PERSON ==========\n")
 

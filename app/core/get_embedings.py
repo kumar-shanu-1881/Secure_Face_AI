@@ -29,7 +29,8 @@ class FaceEmbedding:
         if len(faces) == 0:
             return None
 
-        return faces[0].embedding
+        return faces[0].normed_embedding
+        # return faces[0].embedding
     
 
 get_embedder = FaceEmbedding()

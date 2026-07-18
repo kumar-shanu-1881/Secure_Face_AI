@@ -3,6 +3,7 @@ SecureFace AI\app\core\localface_detector.py
 SecureFace AI\app\db\__pycache__
 app/api/__pycache__
 app/db/__pycache__
-
+SecureFace AI\test\__pycache__
+SecureFace AI\images\Celebrity Faces Dataset
 
 # C:\faceenv\Scripts\Activate.ps1
