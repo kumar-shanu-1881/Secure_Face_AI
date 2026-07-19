@@ -1,4 +1,4 @@
-# import json
+import gc
 import numpy as np
 import cv2
 import uuid
@@ -9,12 +9,19 @@ from app.db.user_repo import user_repo
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash
 
+detector = Detect_face()
+#Get embeddings of cropped image using the face recognition model
+#convert the image into face embeddings using the face recognition model
+embedder = get_embedder
+
 register_bp = Blueprint("register", __name__)
 
 @register_bp.route("/api/register", methods=["POST"])
 
 def register():
-
+    image=None
+    frame=None
+    result=None
     try:
         
         email=request.form.get('email')
@@ -34,19 +41,20 @@ def register():
         image = np.frombuffer(file.read(), np.uint8)
 
         frame = cv2.imdecode(image, cv2.IMREAD_COLOR)
-
-        detector = Detect_face()
+        del image
+        image = None
         
         result = detector.detect(frame)
 
+        del frame
+        frame = None
         #Hash the password using scrypt for secure storage
         hashed_password = generate_password_hash(password,method="scrypt")
 
-        #Get embeddings of cropped image using the face recognition model
-        #convert the image into face embeddings using the face recognition model
-        embedder = get_embedder
         # print(type(image))
         embedding = embedder.get_embedding(result['face'])
+        del result
+        result=None
 
         user={
             'user_id': user_id,
@@ -91,7 +99,11 @@ def register():
         print(f"Registration Error: {str(e)}") 
         return jsonify({"success": False, "message": str(e)}), 400
     
-    
+    finally:
+        # Force Python to clear the system heap right away before handling the next API caller
+        gc.collect()
+
+
 
 def generate_user_id(name):
 

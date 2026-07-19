@@ -1,5 +1,5 @@
 from insightface.app import FaceAnalysis
-
+import gc
 
 class FaceEmbedding:
 
@@ -27,6 +27,8 @@ class FaceEmbedding:
         faces = self.model.get(image)
 
         if len(faces) == 0:
+            del image
+            gc.collect()
             return None
 
         return faces[0].normed_embedding

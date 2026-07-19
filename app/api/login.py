@@ -1,5 +1,6 @@
 import numpy as np 
 import cv2
+import gc
 from app.core.face_detector import Detect_face
 from app.core.get_embedings import get_embedder
 from flask import Blueprint, request, jsonify,session
@@ -7,10 +8,17 @@ from werkzeug.security import check_password_hash
 from app.db.user_repo import user_repo
 from app.core.check_similarity import compare_faces
 
+detector = Detect_face()
+embedder = get_embedder
+
 login_bp=Blueprint('login',__name__)
 @login_bp.route("/api/login",methods=["POST"])
 
 def login():
+    file=None
+    image=None
+    frame=None
+
     try:
         email=request.form.get('email')
         user_exist=True
@@ -54,8 +62,12 @@ def login():
         file=request.files['image']
         image = np.frombuffer(file.read(), np.uint8)
         frame = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        detector = Detect_face()
         result = detector.detect(frame)
+
+        del file,image,frame
+        file=None
+        image=None
+        frame= None
 
         if not result or "face" not in result:
             return jsonify({
@@ -64,7 +76,6 @@ def login():
                 }),400
 
         #convert the captured web  image into face embeddings using the face recognition model
-        embedder = get_embedder
         web_embedding = embedder.get_embedding(result['face']).tolist()
 
         # matching person face
@@ -83,9 +94,6 @@ def login():
                 "success":True,
                 "message":"Face matched"
             })
-        
-        
-        
 
         
     except Exception as e:
@@ -104,4 +112,7 @@ def login():
     #     except Exception as log_error:
     #         print(f"Failed to write to log file: {log_error}")
 
-# def check_match():
+    finally:
+            
+        # Force Python's garbage collector to dump the discarded data before the next login attempt
+        gc.collect()

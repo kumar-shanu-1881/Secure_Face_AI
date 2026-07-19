@@ -14,6 +14,9 @@ def compare_faces(embedding1, embedding2):
 
     # Euclidean Distance
     euclidean_distance = np.linalg.norm(embedding1 - embedding2)
+    del embedding1 ,embedding2
+    embedding1 =None
+    embedding2=None
 
     #Decision logic 
     if cosine_similarity >= 0.70 and euclidean_distance <= 1.10 :

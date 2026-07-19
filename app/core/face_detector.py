@@ -1,6 +1,6 @@
 import cv2 as cv
 import mediapipe as mp
-
+import gc
 
 class Detect_face:
     def __init__(self):
@@ -87,9 +87,11 @@ class Detect_face:
                     is_forward = self._is_looking_forward(detection)
                     if(is_forward):
                         forward_faces_count += 1
-        
+        del results
+        results=None
         if len(faces) == 0:
-
+            del rgb  # Free memory array
+            gc.collect()
             return {
                 "success": False,
                 "message": "No face detected.",
@@ -98,7 +100,8 @@ class Detect_face:
             }
 
         if len(faces) > 1:
-
+            del rgb  # Free memory array
+            gc.collect()
             return {
                 "success": False,
                 "message": "Multiple faces detected.",
@@ -107,7 +110,8 @@ class Detect_face:
             }
 
         if not is_forward and forward_faces_count == 0:
-
+            del rgb  # Free memory array
+            gc.collect()
             return {
                 "success": False,
                 "message": "Please look straight at the camera.",
@@ -115,9 +119,9 @@ class Detect_face:
                 "face": None
             }
         
-        x, y, w, h = faces[0]
-        x = max(0, x)
-        y = max(0, y)
+        # x, y, w, h = faces[0]
+        # x = max(0, x)
+        # y = max(0, y)
 
         
 
@@ -131,7 +135,7 @@ class Detect_face:
 
             "face": rgb,
 
-            "bbox": (x, y, w, h)
+            # "bbox": (x, y, w, h)
         }
         
 
