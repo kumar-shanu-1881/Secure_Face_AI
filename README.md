@@ -1,3 +1,10 @@
+---
+title: SecureFace
+sdk: flask
+app_file: run.py
+pinned: false
+---
+
 # 🔐 SecureFace AI
 
 A real-time **Face Authentication System** built using **Flask**, **MediaPipe**, **InsightFace (ArcFace)**, and **MongoDB**. SecureFace AI authenticates users using both traditional credentials and biometric facial recognition for enhanced security.
