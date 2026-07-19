@@ -13,4 +13,4 @@ jobs:
       - name: Ping the API
         run: |
           # Replace this URL with your Render API URL
-          curl -I https://secure-face-ai.onrender.com
+          curl -I https://secure-face-ai.onrender.com/health
