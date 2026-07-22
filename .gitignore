@@ -42,7 +42,7 @@ dist/
 # test/evaluation/graphs/
 
 # Datasets
- model selection/Humans/
+model selection/Humans/
 images/
 images/Celebrity Faces Dataset/
 
