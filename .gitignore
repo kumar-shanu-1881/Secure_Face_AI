@@ -1,23 +1,66 @@
-# 1. Ignore Python Cache Globally (This handles all your __pycache__ folders at once)
+
+# Python
+
 __pycache__/
 *.py[cod]
 *$py.class
 
-# 2. Ignore Specific App Files
-app/core/localface_detector.py
+# Virtual Environments
 
-# 3. Ignore Datasets & Heavy Models
-model selection/Humans
-images/Celebrity Faces Dataset/
-images/
-
-# 4. Ignore Virtual Environments (like faceenv)
 faceenv/
 venv/
 env/
+.venv/
 
-# 5. Ignore csv file 
+# Environment Variables
+
+.env
+
+# IDE
+
+.vscode/
+.idea/
+
+# Python Build Files
+
+build/
+dist/
+*.egg-info/
+
+# Logs
+
+*.log
+
+# CSV Results
+# (Keep if they are generated automatically)
+
 *.csv
+
+# Evaluation Graphs (optional)
+# Uncomment if auto-generated
+
+# test/evaluation/graphs/
+
+# Datasets
+
+images/
+images/Celebrity Faces Dataset/
+
+test/evaluation/dataset/
+
+# Large Embedding Files
+
+test/evaluation/embeddings/
+
+# Local Experimental Files
+
+app/core/localface_detector.py
+
+# OS Files
+
+.DS_Store
+Thumbs.db
+desktop.ini
 
 
 # C:\faceenv\Scripts\Activate.ps1
