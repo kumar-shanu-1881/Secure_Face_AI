@@ -1,5 +1,9 @@
 const video = document.querySelector("#webcam");
 const canvas = document.querySelector("#canvas");
+const statusMsg = document.querySelector("#statusMessage");
+let detectionStopped = false;
+let latestBlob = null;
+let faceDetected = false;
 
 // Start Webcam
 navigator.mediaDevices.getUserMedia({
@@ -33,7 +37,7 @@ async function detectFace(){
 
     canvas.toBlob(async (blob) => {
 
-         latestBlob = blob;
+        latestBlob = blob;
         const formData = new FormData();
         formData.append("frame", blob);
         
@@ -50,15 +54,11 @@ async function detectFace(){
 
             if (data.success) {
                 faceDetected = data.face;
-                registerBtn.disabled = false;
                 statusMsg.style.color = "lightgreen";
                 statusMsg.innerHTML = "✅ " + data.message;
                 
             } else{
                 faceDetected = false;
-
-                registerBtn.disabled = true;
-                registerBtn.style.color="00072D"
                 
                 statusMsg.style.color = "red";
 
