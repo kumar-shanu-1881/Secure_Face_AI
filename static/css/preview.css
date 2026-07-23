@@ -101,6 +101,10 @@ canvas{
     transform:translateY(-2px);
 }
 
+#canvas{
+    display:none;
+}
+
 
 /* for tablets */
 
