@@ -134,7 +134,7 @@ form.addEventListener("submit", async function(e){
             
            setTimeout(() => {
                 window.location.href = "/dashboard";
-                    }, 1000);
+                    }, 700);
             form.reset();
         statusMsg.innerHTML = "";
 
