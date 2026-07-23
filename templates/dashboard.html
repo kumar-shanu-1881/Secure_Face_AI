@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | SecureFace AI</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-     <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
 </head>
 <body>
+
 
     <nav class="navbar">
 
@@ -17,7 +18,13 @@
 
         <div class="nav-right">
 
-            <span>Welcome, {{ user.name }}</span>
+            <div class="clock-container">
+                <span id="clock"></span>
+            </div>
+
+            <span class="welcome-text">
+                Welcome, {{ user.name }}
+            </span>
 
             <a href="/logout" class="logout-btn">
                 Logout
@@ -27,31 +34,39 @@
 
     </nav>
 
-
     <div class="dashboard">
-
 
 
         <div class="left-panel">
 
-
             <div class="card profile-card">
 
-                <img src="{{ user.profile_image }}" alt="Profile">
+                <!-- <img src="{{ user.profile_image }}" alt="Profile"> -->
 
                 <h2 id="username">{{ user.name }}</h2>
 
-                <p><strong>User ID:</strong> {{ user.user_id }}</p>
-                <p><strong>User Name:</strong> {{ user.name }}</p>
+                <hr>
 
-                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p>
+                    <strong>User ID :</strong>
+                    {{ user.user_id }}
+                </p>
 
-                <p class="verified">
-                    ✅ Successfully Authenticated
+                <p>
+                    <strong>Name :</strong>
+                    {{ user.name }}
+                </p>
+
+                <p>
+                    <strong>Email :</strong>
+                    {{ user.email }}
+                </p>
+
+                <p id="authStatus" class="verified">
+                    🟢 User Authenticated
                 </p>
 
             </div>
-
 
             <div class="card">
 
@@ -63,7 +78,7 @@
 
                     <li>✔ Password Verified</li>
 
-                    <li>✔ Anti-Spoof Passed</li>
+                    <li>✔ Anti-Spoof Detection Passed</li>
 
                     <li>✔ Login Successful</li>
 
@@ -73,11 +88,9 @@
 
         </div>
 
-        <!-- Right Side -->
 
         <div class="right-panel">
 
-            <!-- About -->
 
             <div class="card">
 
@@ -85,16 +98,17 @@
 
                 <p>
 
-                    SecureFace AI is an intelligent face authentication
-                    system that securely verifies users using
-                    AI-powered facial recognition, password authentication,
-                    and anti-spoof detection.
+                    SecureFace AI is an AI-powered authentication system
+                    that combines facial recognition,
+                    password authentication,
+                    anti-spoof detection,
+                    and secure cryptographic techniques
+                    to provide a fast and reliable login experience.
 
                 </p>
 
             </div>
 
-            <!-- Features -->
 
             <div class="card">
 
@@ -136,7 +150,6 @@
 
             </div>
 
-            <!-- Technology -->
 
             <div class="card">
 
@@ -144,78 +157,54 @@
 
                 <div class="table-container">
 
-                <table>
+                    <table>
 
-                    <tr>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>HTML, CSS, JavaScript</td>
+                        </tr>
 
-                        <td>Frontend</td>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Python, Flask</td>
+                        </tr>
 
-                        <td>   HTML, CSS, JavaScript</td>
+                        <tr>
+                            <td>Database</td>
+                            <td>MongoDB Atlas</td>
+                        </tr>
 
-                    </tr>
+                        <tr>
+                            <td>Face Detection</td>
+                            <td>MediaPipe</td>
+                        </tr>
 
-                    <tr>
+                        <tr>
+                            <td>Face Recognition</td>
+                            <td>InsightFace (Buffalo_SC)</td>
+                        </tr>
 
-                        <td>Backend</td>
+                        <tr>
+                            <td>Computer Vision</td>
+                            <td>OpenCV</td>
+                        </tr>
 
-                        <td>   Python, Flask</td>
+                        <tr>
+                            <td>Embedding Matching</td>
+                            <td>Cosine Similarity + Euclidean Distance</td>
+                        </tr>
 
-                    </tr>
+                        <tr>
+                            <td>Security</td>
+                            <td>Scrypt Password Hashing</td>
+                        </tr>
 
-                    <tr>
+                    </table>
 
-                        <td>Database</td>
-
-                        <td>   MongoDB Atlas</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Face Detection</td>
-
-                        <td>   MediaPipe</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Face Recognition</td>
-
-                        <td>   InsightFace (Buffalo_SC)</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Computer Vision</td>
-
-                        <td>   OpenCV</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Embedding Matching</td>
-
-                        <td>   Cosine Similarity + Euclidean Distance</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Security</td>
-
-                        <td>   Scrypt Password Hashing</td>
-
-                    </tr>
-
-                </table>
                 </div>
 
             </div>
 
-            <!-- Workflow -->
 
             <div class="card">
 
@@ -248,6 +237,8 @@
         </div>
 
     </div>
+
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
 </body>
 </html>

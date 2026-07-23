@@ -170,6 +170,29 @@ table td{
     border-radius:8px;
 }
 
+.clock-container{
+    margin-right:25px;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:500;
+}
+
+.welcome-text{
+    margin-right:20px;
+    font-weight:500;
+}
+
+.verified{
+    margin-top:20px;
+    color:#22c55e;
+    font-weight:600;
+}
+
+.profile-card hr{
+    margin:15px 0;
+    border:none;
+    border-top:1px solid rgba(255,255,255,.15);
+}
 
 @media(max-width:992px){
 
