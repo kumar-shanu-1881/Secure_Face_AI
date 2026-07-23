@@ -1,283 +1,282 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureFace AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SecureFace AI | Next-Generation Biometric Authentication</title>
+    <meta
+        content="SecureFace AI is a robust facial authentication system combining deep learning, anti-spoofing, and advanced encryption for seamless and secure access control."
+        name="description" />
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
     <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
 </head>
+
 <body>
-
     <nav class="navbar">
-
         <div class="logo">
             🔒 SecureFace AI
         </div>
-
         <ul class="nav-links">
             <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/preview">Preview</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
             <li><a href="#technology">Technology</a></li>
             <li><a href="#about">About</a></li>
         </ul>
-
         <div class="nav-buttons">
-            <a href="/login" class="login-btn">Login</a>
-            <a href="/register" class="register-btn">Register</a>
+            <a class="login-btn" href="/login">Login</a>
+            <a class="register-btn" href="/register">Register</a>
         </div>
-
     </nav>
-
     <section class="hero">
-
         <div class="hero-left">
-
-            <h1>AI-Powered Face Authentication</h1>
-
+            <h1>Next-Generation AI-Powered Face Authentication</h1>
             <p>
-                SecureFace AI is an intelligent facial authentication system
-                that combines face recognition, anti-spoof detection and
-                password verification for secure access.
+                Experience the future of secure, passwordless access. SecureFace AI is an intelligent, multi-layered
+                biometric authentication system. By combining state-of-the-art 512D face embeddings, rigorous anti-spoof
+                liveness detection, and robust cryptographic verification, we deliver frictionless enterprise-grade
+                security for modern web applications.
             </p>
-
             <div class="hero-buttons">
-
-                <a href="/register" class="primary-btn">
-                    Get Started
+                <a class="primary-btn" href="/register">
+                    Get Started Now
                 </a>
-
-                <a href="#about" class="secondary-btn">
-                    Learn More
+                <a class="secondary-btn" href="#use-cases">
+                    See Real-World Uses
                 </a>
-
             </div>
-
         </div>
-
         <div class="hero-right">
-
-            <img src="{{ url_for('static', filename='image/SecureFace_Ai.png') }}"
-                 alt="SecureFace AI">
-
+            <img alt="SecureFace AI Authentication Visualization"
+                src="{{ url_for('static', filename='image/SecureFace_Ai.png') }}" />
         </div>
-
     </section>
-
-
-    <section id="features" class="features">
-
-        <h2>Core Features</h2>
-
+    <section class="features" id="features">
+        <h2>Core Features &amp; Capabilities</h2>
+        <p class="section-subtitle">Built on enterprise-grade machine learning models, SecureFace AI provides a
+            comprehensive suite of security features designed to protect user identities and prevent unauthorized
+            access.</p>
         <div class="feature-grid">
-
             <div class="card">
-                <h3>📷 Face Registration</h3>
-
+                <h3>📷 Precision Face Registration</h3>
                 <p>
-                    Register users by capturing facial embeddings securely.
+                    A streamlined onboarding process that captures high-fidelity facial data. The system extracts a
+                    unique <strong>512-dimensional vector embedding</strong> using InsightFace, ensuring highly accurate
+                    identity modeling. For maximum privacy, raw images are processed in-memory and never permanently
+                    stored.
                 </p>
             </div>
-
             <div class="card">
-
-                <h3>😊 Face Authentication</h3>
-
+                <h3>😊 Frictionless Authentication</h3>
                 <p>
-                    Authenticate users using deep facial embeddings.
+                    Deliver a lightning-fast login experience. Users are authenticated in milliseconds. The backend
+                    calculates the <strong>Cosine Similarity</strong> between the live camera feed and the securely
+                    stored biometric embeddings, providing industry-leading accuracy without the friction of passwords.
                 </p>
-
             </div>
-
             <div class="card">
-
-                <h3>🛡 Anti-Spoof Detection</h3>
-
+                <h3>🛡 Robust Anti-Spoofing (Liveness)</h3>
                 <p>
-                    Prevent unauthorized access using fake images or videos.
+                    Defend against presentation attacks with advanced Liveness Detection. Utilizing neural networks, the
+                    system actively distinguishes between a real, live human face and spoofing attempts such as printed
+                    photos, digital screens, or 3D masks.
                 </p>
-
             </div>
-
             <div class="card">
-
-                <h3>🔐 Password Security</h3>
-
+                <h3>🔐 Military-Grade Encryption</h3>
                 <p>
-                    Passwords are securely encrypted using Scrypt hashing.
+                    Security through defense in depth. While biometrics handle the primary identity check, sensitive
+                    backend data and fallback passwords are secured using <strong>Scrypt cryptographic hashing</strong>,
+                    preventing brute-force and dictionary attacks on the database.
                 </p>
-
             </div>
-
             <div class="card">
-                <h3>🧑‍💻 Isolation Check and Prevent Poor Detection</h3>
-                <p>Checks frame at every 350 ms to ensure single face and user looks at front</p>
+                <h3>🧑‍💻 Continuous Isolation &amp; Presence Checks</h3>
+                <p>
+                    Active monitoring ensures optimal detection conditions. The system analyzes the camera frame every
+                    <strong>350 milliseconds</strong> via MediaPipe to enforce a strict "single-face" policy. It
+                    instantly rejects background interference (multiple people) and verifies the user maintains
+                    front-facing eye contact during the entire authentication window.
+                </p>
             </div>
-
         </div>
-
     </section>
-
-
-    <section id="workflow" class="workflow">
-
-        <h2>Authentication Workflow</h2>
-
+    <section class="workflow" id="workflow">
+        <h2>The Authentication Pipeline</h2>
+        <p class="section-subtitle">A seamless, five-step continuous evaluation loop designed for maximum security and
+            minimal friction.</p>
         <div class="steps">
-
             <div class="step">
-
                 <div class="circle">1</div>
-
-                <h3>Capture Face</h3>
-
+                <h3>Secure Capture</h3>
+                <p>Browser requests secure access to the local camera via WebRTC.</p>
             </div>
-
             <div class="arrow">→</div>
-
             <div class="step">
-
                 <div class="circle">2</div>
-
                 <h3>Face Detection</h3>
-                
+                <p>MediaPipe isolates the facial bounding box in real-time.</p>
             </div>
-            
             <div class="arrow">→</div>
             <div class="step">
-
                 <div class="circle">3</div>
-
-                <h3>Tell user to look camera</h3>
-                
+                <h3>Validation Gate</h3>
+                <p>Enforce single-face, liveness, &amp; front-facing rules (350ms loop).</p>
             </div>
-
             <div class="arrow">→</div>
-
             <div class="step">
-
                 <div class="circle">4</div>
-
-                <h3>Generate Embeddings</h3>
-
+                <h3>Vector Extraction</h3>
+                <p>InsightFace translates the validated face into a 512D array.</p>
             </div>
-
             <div class="arrow">→</div>
-
             <div class="step">
-
                 <div class="circle">5</div>
-
-                <h3>Authentication</h3>
-
+                <h3>Identity Match</h3>
+                <p>Backend performs Cosine Similarity against MongoDB records.</p>
             </div>
-
         </div>
-
     </section>
-
-    <section id="technology" class="technology">
-
+    <section id="use-cases">
+        <h2>Real-World Applications</h2>
+        <p class="section-subtitle">SecureFace AI is highly adaptable, replacing traditional authentication across
+            various industries where security, speed, and user experience are paramount.</p>
+        <div class="use-case-grid">
+            <div class="use-case-card">
+                <span class="use-case-icon">🏦</span>
+                <h3>Secure Financial Services</h3>
+                <p>Banks and fintech platforms use facial authentication to secure high-risk transactions, approve wire
+                    transfers, and provide frictionless, passwordless logins to mobile banking apps, significantly
+                    reducing account takeover fraud.</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">🏢</span>
+                <h3>Enterprise Access Control</h3>
+                <p>Modern workplaces integrate facial recognition to replace vulnerable ID badges and shared passwords.
+                    It ensures only authorized personnel can access secure facilities, restricted digital dashboards, or
+                    sensitive corporate data.</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">🩺</span>
+                <h3>Healthcare &amp; Patient Privacy</h3>
+                <p>Hospitals deploy facial authentication for doctors to gain touchless, instant access to electronic
+                    health records (EHR) and medication dispensing systems, ensuring HIPAA compliance while maintaining
+                    hygiene protocols.</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">🎓</span>
+                <h3>EdTech &amp; Remote Proctoring</h3>
+                <p>Educational institutions utilize continuous facial verification during online examinations to prevent
+                    cheating, verify student identity, and automate attendance tracking without manual roll calls.</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">🛒</span>
+                <h3>E-Commerce &amp; Retail</h3>
+                <p>Retailers enable "pay-by-face" checkout experiences and seamless loyalty program identification,
+                    speeding up the checkout process and providing highly personalized customer interactions.</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">🛂</span>
+                <h3>Identity Verification (KYC)</h3>
+                <p>Digital platforms accelerate user onboarding by comparing a live selfie against government-issued
+                    IDs, establishing a strong root of trust and complying with Know Your Customer (KYC) regulations.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="technology" id="technology">
         <h2>Technology Stack</h2>
-
+        <p class="section-subtitle">A robust, scalable architecture powered by modern web frameworks and
+            state-of-the-art computer vision models.</p>
         <div class="tech-grid">
-
             <div class="tech-card">
-                <h3>Frontend</h3>
-
-                <p>HTML</p>
-                <p>CSS</p>
-                <p>JavaScript</p>
-
+                <h3>Frontend Interface</h3>
+                <p><strong>HTML5 / CSS3</strong> for semantic, responsive design</p>
+                <p><strong>Vanilla JavaScript</strong> for DOM manipulation</p>
+                <p><strong>WebRTC API</strong> for real-time browser camera access</p>
+                <div>
+                    <span class="tech-badge">Responsive</span>
+                    <span class="tech-badge">Client-side processing</span>
+                </div>
             </div>
-
             <div class="tech-card">
-
-                <h3>Backend</h3>
-
-                <p>Flask</p>
-                <p>Python</p>
-
+                <h3>Backend Server</h3>
+                <p><strong>Flask (Python)</strong> for lightweight, high-performance API routing</p>
+                <p><strong>Werkzeug</strong> for secure HTTP request handling</p>
+                <p><strong>CORS</strong> enabled for cross-origin security</p>
+                <div>
+                    <span class="tech-badge">REST API</span>
+                    <span class="tech-badge">Stateless</span>
+                </div>
             </div>
-
             <div class="tech-card">
-
-                <h3>AI & Computer Vision</h3>
-
-                <p>InsightFace (Buffalo_SC)</p>
-                <p>MediaPipe</p>
-                <p>OpenCV</p>
-
+                <h3>AI &amp; Computer Vision</h3>
+                <p><strong>InsightFace (Buffalo_L)</strong> for extracting 512D deep embeddings</p>
+                <p><strong>MediaPipe</strong> for ultra-fast, lightweight face tracking</p>
+                <p><strong>OpenCV &amp; NumPy</strong> for matrix transformations &amp; image processing</p>
+                <div>
+                    <span class="tech-badge">Deep Learning</span>
+                    <span class="tech-badge">Biometrics</span>
+                </div>
             </div>
-
             <div class="tech-card">
-
-                <h3>Database</h3>
-
-                <p>MongoDB Atlas</p>
-
+                <h3>Database &amp; Security</h3>
+                <p><strong>MongoDB Atlas</strong> for flexible, NoSQL document storage (JSON/Arrays)</p>
+                <p><strong>Cosine Similarity Math</strong> for matching vector arrays</p>
+                <p><strong>Scrypt</strong> for cryptographic hashing of sensitive data</p>
+                <div>
+                    <span class="tech-badge">Cloud Hosted</span>
+                    <span class="tech-badge">Vector Search</span>
+                </div>
             </div>
-
         </div>
-
     </section>
-
-    <section id="about" class="about">
-
+    <section class="about" id="about">
         <h2>About SecureFace AI</h2>
-
         <p>
-
-            SecureFace AI is an AI-based face authentication system developed
-            to provide secure user verification using facial recognition.
-
-            The system detects user at every 350 ms. 
-
-            The system generates facial embeddings using
-            <strong>InsightFace Buffalo_SC</strong>, verifies passwords using
-            <strong>Scrypt hashing</strong>, and protects against spoofing
-            attacks using an anti-spoof detection pipeline.
-
+            SecureFace AI was developed to bridge the gap between high-security requirements and frictionless user
+            convenience. Traditional password-based systems are increasingly vulnerable to phishing and brute-force
+            attacks, while many legacy biometric systems suffer from easily bypassed liveness checks or slow processing
+            times.
+            <br /><br />
+            By implementing a rigorous evaluation loop that checks the user frame every <strong>350
+                milliseconds</strong>, we ensure constant verification and optimal conditions during the login process.
+            Our core engine relies on the acclaimed <strong>InsightFace</strong> library for generating highly accurate
+            facial embeddings, providing enterprise-grade recognition performance even on standard hardware.
+            <br /><br />
+            Coupled with secure NoSQL storage via <strong>MongoDB</strong> and continuous anti-spoofing evaluations,
+            SecureFace AI is built to provide trustworthy, passwordless identity verification for modern, secure web
+            applications.
         </p>
-
     </section>
-
     <footer>
-
-        <h3>SecureFace AI</h3>
-        <br>
-        
-        <p>
-            AI-Powered Face Authentication System
-        </p>
-        <br>
-        
-        
-        <p>
-            
-            Developed by <strong>Kumar Shanu</strong>
-            
-        </p>
-
-        <div class="footer-links">
-
-            <a href="#">GitHub</a>
-
-            <a href="#">LinkedIn</a>
-
-            <a href="#">Portfolio</a>
-
+        <div>
+            <h3>SecureFace AI</h3>
+            <p>
+                Next-Generation AI-Powered Biometric Authentication System
+            </p>
+            <p>
+                Architected and Developed by <strong>Kumar Shanu</strong>
+            </p>
+            <div class="footer-links">
+                <a href="https://github.com/kumar-shanu-1881" rel="noopener noreferrer" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/kumar-shanu-9219a5293/" rel="noopener noreferrer"
+                    target="_blank">LinkedIn</a>
+                <a href="#" rel="noopener noreferrer" target="_blank">Portfolio</a>
+            </div>
+            <p class="copyright">
+                © 2026 SecureFace AI. All rights reserved.
+            </p>
         </div>
-
-        <p class="copyright">
-
-            © 2026 SecureFace AI
-
-        </p>
-
     </footer>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <!-- <script src="../static/js/index.js"></script> -->
 </body>
+
 </html>
