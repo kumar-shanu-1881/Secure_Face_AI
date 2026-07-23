@@ -43,6 +43,7 @@ body{
 .box{
     width:100%;
     display:flex;
+    gap:5px;
     justify-content:center;
     flex-direction: column;
     align-items:center;
@@ -84,9 +85,10 @@ body{
 }
 
 #statusMessage{
+    margin-top:10px;
     width:100%;
     text-align:center;
-    font-size:1rem;
+    font-size:1.5rem;
     font-weight:bold;
 }
 
