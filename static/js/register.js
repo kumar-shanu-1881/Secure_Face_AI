@@ -6,8 +6,8 @@ const registerBtn = document.querySelector("#registerBtn");
 const bxrit=document.querySelector(".box-left");
 let faceDetected = false;
 let detectionStopped = false;
-let capturedImageURL = null;
 let latestBlob = null;
+let capturedImageURL = null;
 
 // Start Webcam
 navigator.mediaDevices.getUserMedia({
