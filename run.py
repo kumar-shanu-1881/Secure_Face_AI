@@ -14,6 +14,10 @@ def health():
     # Return 200 OK immediately.
     return jsonify({"status": "alive"}), 200
 
+@app.route('/preview',methods=['GET'])
+def preview():
+    return render_template("preview.html")
+
 @app.route("/register")
 def register():
     return render_template("register.html")
