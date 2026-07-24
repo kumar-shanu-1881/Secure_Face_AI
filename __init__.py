@@ -20,6 +20,7 @@ def create_app():
     from app.api.login import login_bp
     from app.api.dashboard import dashboard_bp
     from app.api.logout import logout_bp
+    from app.api.checksimilarity import similarity_bp
 
 
     app.register_blueprint(detect_bp)
@@ -27,5 +28,6 @@ def create_app():
     app.register_blueprint(login_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(logout_bp)
+    app.register_blueprint(similarity_bp)
 
     return app
