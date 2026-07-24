@@ -33,29 +33,29 @@ def checksimilarity():
         
         frame1 = cv2.imdecode(img1, cv2.IMREAD_COLOR)
 
-        result1 = detector.detect(frame1)
+        # result1 = detector.detect(frame1)
 
             # get embeddings
-        embedding1 = embedder.get_embedding(result1['face'])
+        embedding1 = embedder.get_embedding(frame1)
 
         # for image 2 
         img2 = np.frombuffer(img2.read(), np.uint8)
         
         frame2 = cv2.imdecode(img2, cv2.IMREAD_COLOR)
 
-        result2 = detector.detect(frame2)
+        # result2 = detector.detect(frame2)
             # get embeddings
-        embedding2 = embedder.get_embedding(result2['face'])
+        embedding2 = embedder.get_embedding(frame2)
 
         matched,cs_sim,ecd_dit=compare_faces(embedding1,embedding2)
         
-        del img1,img2,frame1,frame2,result1,result2,embedding1,embedding2
+        del img1,img2,frame1,frame2,embedding1,embedding2
         img1=None
         img2=None
         frame1=None
         frame2=None
-        result1=None
-        result2=None
+        # result1=None
+        # result2=None
         embedding1=None
         embedding2=None
 

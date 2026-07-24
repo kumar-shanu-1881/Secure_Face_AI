@@ -28,6 +28,8 @@ A real-time **Face Authentication System** built using **Flask**, **MediaPipe**,
 - 🧠 Face Recognition using InsightFace (ArcFace)
 - 📐 512-D Face Embeddings
 - 📊 Cosine Similarity & Euclidean Distance Matching
+- 🔍 Face Detection Preview Page
+- 🆚 Face Similarity Comparison Tool
 - 🔒 Password Hashing (Werkzeug - Scrypt)
 - 💾 MongoDB Database Integration
 - 🆔 Automatic User ID Generation
@@ -39,24 +41,18 @@ A real-time **Face Authentication System** built using **Flask**, **MediaPipe**,
 
 ## 📷 Application Preview
 
-> Replace the placeholders below with your screenshots after uploading them to the repository.
-
 | Page | Preview |
 |------|---------|
-| Landing Page | ![Landing Page](images/landing-page.png) |
-| User Registration | ![Registration](images/register-page.png) |
-| Face Capture | ![Face Capture](images/face-capture.png) |
-| Login | ![Login](images/login-page.png) |
-| Dashboard | ![Dashboard](images/dashboard.png) |
+| Landing Page | ![Landing Page](static/image/Landing_page.png) |
+| User Registration | ![Registration](static/image/registration.png) |
+| Login | ![Login](static/image/login.png) |
+| Dashboard | ![Dashboard](static/image/Dashboard.png) |
+| Face Detection Preview | ![Face Detection Preview](static/image/detection_preview.png) |
+| Face Comparison Tool | ![Face Detection Preview](static/image/face_comparison.png) |
 
 ### 🎥 Demo Videos / GIFs
 
-> Replace these placeholders after uploading your GIF or recording.
-
-- **Registration Workflow:** ![Registration Demo](images/register-demo.gif) — or 🎥 *(Add YouTube / Google Drive link here)*
-- **Login & Face Authentication:** ![Login Demo](images/login-demo.gif) — or 🎥 *(Add YouTube / Google Drive link here)*
-- **Complete Project Walkthrough:** 🎬 *(Add YouTube link here, e.g. https://youtube.com/your-demo-video)*
-
+- **Demo:** ![Login Demo](static/image/demo.gif)
 ---
 
 ## 🖥 Demo Walkthrough
@@ -85,6 +81,25 @@ A real-time **Face Authentication System** built using **Flask**, **MediaPipe**,
 - Authentication Status
 - Technology Stack
 
+### Preview Page
+
+- Live webcam preview
+- Real-time face detection
+- Displays face detection results
+- Redirects to Face Similarity page
+
+### Face Similarity Page
+
+- Upload two face images
+- Generates embeddings using InsightFace
+- Compares embeddings using:
+    • Cosine Similarity
+    • Euclidean Distance
+- Displays:
+    • Match / No Match
+    • Cosine Similarity Score
+    • Euclidean Distance
+
 ---
 
 ## 🏗 Project Architecture
@@ -99,6 +114,8 @@ SecureFace AI
 │   │   ├── register.py
 │   │   ├── login.py
 │   │   └── dashboard.py
+│   │   └── logout.py
+│   │   └── checksimilarity.py
 │   │
 │   ├── core
 │   │   ├── face_detector.py
@@ -162,6 +179,27 @@ Input Image → MediaPipe Face Detection → Face Crop
             → Cosine Similarity → Euclidean Distance
             → Authentication Result
 ```
+### Face Similarity Pipeline
+
+Image 1 
+      │
+      ▼
+Generate Embedding
+      │
+      ▼
+Image 2
+      │
+      ▼
+Generate Embedding
+      │
+      ▼
+Cosine Similarity
+      │
+      ▼
+Euclidean Distance
+      │
+      ▼
+Match Decision
 
 ---
 
@@ -377,6 +415,7 @@ Application will run at: `http://127.0.0.1:10000`
 - Real-Time Face Authentication
 - Secure User Registration
 - Face + Password Login
+• Face Detection Preview Module
 - InsightFace ArcFace Recognition
 - MediaPipe Face Detection
 - MongoDB Integration
@@ -384,6 +423,12 @@ Application will run at: `http://127.0.0.1:10000`
 - Session-Based Authentication
 - Face Similarity Evaluation
 - Production-Oriented Design
+• Face Similarity Comparison Tool
+• Flask REST APIs
+• Dual Metric Verification
+• Threshold Optimization
+• Evaluation Framework
+• ArcFace 512-D Embeddings
 
 ---
 
