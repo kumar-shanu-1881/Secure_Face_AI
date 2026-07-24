@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Compare</title>
+  <!-- <link rel="stylesheet" href="../static/css/checksimilarity.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/checksimilarity.css') }}">
+</head>
+<body>
+   <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="logo">
+        🔒 SecureFace AI
+    </a>
+</nav>
+  <h1>Face Comparison Tool</h1>
+  <p class="subtitle">Upload two face images and check if they match</p>
+
+  <div class="main-wrapper">
+
+
+    <div class="upload-box" id="box1">
+      <h3>Image 1</h3>
+      <input type="file" id="img1Input" accept="image/*">
+      <div class="preview-area" id="preview1">
+        <span class="placeholder-text">No image uploaded</span>
+      </div>
+    </div>
+
+
+    <div class="middle-box">
+      <button id="compareBtn" disabled>Compare Faces</button>
+
+      <div id="loading" style="display:none;">Processing, please wait...</div>
+
+      <div id="resultBox" style="display:none;">
+        <h3>Result</h3>
+        <p>Ecludian Distance: <span id="distanceVal">-</span></p>
+        <p>Cosine Similarity: <span id="thresholdVal">-</span></p>
+        <p>Match: <span id="matchVal">-</span></p>
+      </div>
+
+      <div id="errorBox" style="display:none; color:red;"></div>
+    </div>
+
+
+    <div class="upload-box" id="box2">
+      <h3>Image 2</h3>
+      <input type="file" id="img2Input" accept="image/*">
+      <div class="preview-area" id="preview2">
+        <span class="placeholder-text">No image uploaded</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="note">Note: make sure detect.py server is running on localhost:5000 before comparing.</p>
+    <script src="{{ url_for('static', filename='js/checksimilarity.js') }}"></script>
+  <!-- <script src="../static/js/checksimilarity.js"></script> -->
+</body>
+</html>
