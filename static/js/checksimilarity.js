@@ -70,11 +70,11 @@ compareBtn.addEventListener("click", function () {
       loadingDiv.style.display = "none";
       compareBtn.disabled = false;
 
-      document.getElementById("distanceVal").textContent = data.distance;
-      document.getElementById("thresholdVal").textContent = data.threshold;
+      document.getElementById("distanceVal").textContent = data.distanceVal;
+      document.getElementById("thresholdVal").textContent = data.thresholdVal;
 
       const matchSpan = document.getElementById("matchVal");
-      if (data.match) {
+      if (data.matchVal) {
         matchSpan.textContent = "YES";
         matchSpan.className = "match";
       } else {
