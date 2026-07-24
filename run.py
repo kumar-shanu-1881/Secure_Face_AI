@@ -18,6 +18,10 @@ def health():
 def preview():
     return render_template("preview.html")
 
+@app.route('/checksimilarity')
+def checksimilarity():
+    return render_template("checksimilarity.html")
+
 @app.route("/register")
 def register():
     return render_template("register.html")
