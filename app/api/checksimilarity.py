@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 from app.core.face_detector import Detect_face
 from app.core.get_embedings import get_embedder
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,render_template
 from app.core.check_similarity import compare_faces
 
 
@@ -15,12 +15,16 @@ embedder = get_embedder
 
 similarity_bp = Blueprint("checksimilarity", __name__)
 
-@similarity_bp.route("/api/checksimilarity", methods=["POST"])
+@similarity_bp.route("/checksimilarity", methods=["POST"])
 
 def checksimilarity():
+    
     img1=None
     img2=None
     try:
+        if 'imageA' not in request.files or 'imageB' not in request.files:
+            return jsonify({"success": False, "message": "Both imageA and imageB are required."}), 400
+        
         img1=request.files['imageA']
         img2=request.files['imageB']
 
@@ -57,10 +61,10 @@ def checksimilarity():
 
         results=jsonify({
              "matchVal":matched,
-             "distanceVal":ecd_dit,
-             "thresholdVal":cs_sim,
+             "distanceVal":round(float(ecd_dit),4),
+             "thresholdVal":round(float(cs_sim),4)
 
-        })
+        }),200
 
         return results
     
