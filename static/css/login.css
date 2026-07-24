@@ -14,6 +14,37 @@ body{
     min-height:100vh;
     padding:20px;
 }
+/* --- Navigation Bar --- */
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+    background-color: rgba(22, 27, 34, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.navbar .logo:hover {
+    opacity: 0.85;
+}
+
 .container{
     width:100%;
     max-width:1000px;
