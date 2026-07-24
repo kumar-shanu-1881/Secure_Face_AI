@@ -19,7 +19,7 @@ def compare_faces(embedding1, embedding2):
     embedding2=None
 
     #Decision logic 
-    if cosine_similarity >= 0.70 and euclidean_distance <= 1.10 :
+    if cosine_similarity >= 0.55 and euclidean_distance <= 1.05 :
         return True,cosine_similarity,euclidean_distance
         
     return False ,cosine_similarity,euclidean_distance
