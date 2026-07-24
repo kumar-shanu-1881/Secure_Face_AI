@@ -60,10 +60,10 @@ def checksimilarity():
         embedding2=None
 
         results=jsonify({
-             "matchVal":matched,
-             "distanceVal":round(float(ecd_dit),4),
-             "thresholdVal":round(float(cs_sim),4)
-
+            "success": True,
+            "matchVal": bool(matched),
+            "distanceVal": round(float(ecd_dit), 4),
+            "thresholdVal": round(float(cs_sim), 4)
         }),200
 
         return results
