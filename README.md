@@ -180,7 +180,7 @@ Input Image → MediaPipe Face Detection → Face Crop
             → Authentication Result
 ```
 ### Face Similarity Pipeline
-
+```
 Image 1 
       │
       ▼
@@ -200,6 +200,7 @@ Euclidean Distance
       │
       ▼
 Match Decision
+```
 
 ---
 
