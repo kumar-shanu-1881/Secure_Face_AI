@@ -26,7 +26,6 @@ body{
     line-height:1.6;
 }
 
-/* navbar */
 
 .navbar{
     width:100%;
@@ -94,8 +93,6 @@ body{
     transform:translateY(-2px);
 }
 
-/* hero */
-
 .hero{
     width:100%;
     min-height:90vh;
@@ -162,21 +159,22 @@ body{
 }
 
 .hero-right img{
+    border-radius: 15px;
     width:100%;
     max-width:500px;
 }
 
-.hero-image{
+.hero-right img{
     border-radius:18px;
     box-shadow:0 25px 60px rgba(0,0,0,.45);
     transition:.4s;
 }
 
-.hero-image:hover{
+.hero-right img:hover{
     transform:translateY(-8px);
+    box-shadow:0 25px 60px rgba(175, 0, 0, 0.278);
 }
 
-/* generic section stuff */
 
 section{
     padding:80px 60px;
@@ -197,7 +195,7 @@ section h2{
     line-height:1.8;
 }
 
-/* feature cards */
+
 
 .feature-grid{
     display:grid;
@@ -228,7 +226,7 @@ section h2{
     color:var(--primary);
 }
 
-/* how it works */
+
 
 .workflow-section{
     background:var(--bg-alt);
@@ -246,13 +244,17 @@ section h2{
     width:160px;
     background:var(--card);
     padding:25px;
+    border: 1px solid transparent;
     border-radius:10px;
     text-align:center;
     transition:.3s;
 }
 
 .step:hover{
-    transform:translateY(-8px);
+    border: 1px solid hotpink; /* Combined into 1 line */
+    box-shadow: 0 15px 35px rgba(218, 70, 229, 0.905);
+    transform: translateY(-8px);
+    
 }
 
 .step-text{
@@ -330,13 +332,15 @@ section h2{
     background:var(--card);
     border-radius:10px;
     padding:25px;
+    border: 1px solid transparent;
     text-align:center;
     transition:.3s;
 }
 
 .tech-card:hover{
+    border-color: #7900c5;
+    box-shadow:0 15px 35px rgba(113, 0, 199, 0.25);
     transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(79,70,229,.25);
 }
 
 .tech-card h3{

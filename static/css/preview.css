@@ -14,7 +14,6 @@ body {
     align-items: center;
 }
 
-/* --- Navigation Bar --- */
 .navbar {
     width: 100%;
     display: flex;
@@ -45,7 +44,7 @@ body {
     opacity: 0.85;
 }
 
-/* --- Main Layout Container --- */
+
 .container {
     width: 100%;
     max-width: 900px;
@@ -79,7 +78,7 @@ body {
     gap: 1rem;
 }
 
-/* --- Camera Frame --- */
+
 .camera-box {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -98,7 +97,6 @@ body {
     transform: scaleX(-1); /* Mirror camera feed */
 }
 
-/* --- Status & Hidden Elements --- */
 #statusMessage {
     width: 100%;
     text-align: center;
@@ -112,7 +110,6 @@ canvas, #canvas {
     display: none;
 }
 
-/* --- Action Button --- */
 #simi-btn {
     width: 100%;
     padding: 14px 24px;
@@ -138,7 +135,7 @@ canvas, #canvas {
     transform: translateY(0);
 }
 
-/* --- Responsive Styles --- */
+
 @media (max-width: 768px) {
     .container {
         margin: 1rem;
