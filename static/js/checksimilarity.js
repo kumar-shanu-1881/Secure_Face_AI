@@ -56,7 +56,7 @@ compareBtn.addEventListener("click", function () {
   formData.append("imageA", img1File);
   formData.append("imageB", img2File);
 
-  fetch("/api/checksimilarity", {
+  fetch("/checksimilarity", {
     method: "POST",
     body: formData
   })
