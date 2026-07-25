@@ -21,3 +21,4 @@ rich
 protobuf==4.25.9
 mediapipe==0.10.14
 insightface==1.0.1
+ gunicorn==26.0.0
