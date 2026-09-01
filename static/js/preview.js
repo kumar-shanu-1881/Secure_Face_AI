@@ -74,7 +74,7 @@ async function detectFace(){
         finally {
             // CRITICAL: Schedule the next frame ONLY after this one finishes (or fails)
             // This prevents network queue flooding
-            setTimeout(detectFace, 350);
+            setTimeout(detectFace, 100);
         }
 
     }, "image/jpeg");
