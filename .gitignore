@@ -63,3 +63,4 @@ desktop.ini
 
 
 # C:\faceenv\Scripts\Activate.ps1
+# run application with this command in terminal: & C:/faceenv/Scripts/Activate.ps1; python app.py
