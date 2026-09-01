@@ -3,8 +3,10 @@ import cv2
 import gc
 from flask import Blueprint, request, jsonify
 from app.core.face_detector import Detect_face
+from app.core.anti_spoofing import LivenessDetector
 
 detector = Detect_face()
+anti_spoof = LivenessDetector()
 detect_bp = Blueprint("detect", __name__)
 
 @detect_bp.route("/detect", methods=["POST"])
@@ -23,12 +25,18 @@ def detect():
         
         result = detector.detect(frame)
 
+        # add anti spoofing
+        is_live = False
+        if result["success"]:
+            liveness_data = anti_spoof.check_liveness(frame)
+            is_live = liveness_data["is_live"]
+
         del file,image,frame
         file=None
         image=None
         frame=None
 
-        if result["success"]:
+        if result["success"] and is_live:
 
             # x, y, w, h = result["bbox"]
 
