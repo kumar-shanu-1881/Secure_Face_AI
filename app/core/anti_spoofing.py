@@ -1,5 +1,6 @@
 import math
 import cv2
+import time
 import numpy as np
 import mediapipe as mp
 
@@ -15,8 +16,8 @@ class LivenessDetector:
         )
 
         # Cutoff thresholds
-        self.blink_close_limit = 0.20
-        self.blink_open_limit = 0.24
+        self.blink_close_limit = 0.23
+        self.blink_open_limit = 0.26
         self.turn_limit = 18.0
         self.tilt_limit = 12.0
 
@@ -41,6 +42,7 @@ class LivenessDetector:
         self.eye_state = "OPEN"
         self.frames_closed = 0
         self.blink_count = 0
+        self.last_blink_time = 0.0
 
     def _get_distance(self, pt1, pt2):
         # Simple Pythagorean distance between two 2D points.
@@ -126,6 +128,7 @@ class LivenessDetector:
                 # Eye opened again within 1-10 frames -> genuine blink!
                 if 1 <= self.frames_closed <= 10:
                     self.blink_count += 1
+                    self.last_blink_time = time.time()
                 self.eye_state = "OPEN"
                 self.frames_closed = 0
 
@@ -140,6 +143,10 @@ class LivenessDetector:
 
         # If no face is visible
         if not result.multi_face_landmarks:
+            self.no_face_frames += 1
+            # Reset only after 5 consecutive missing frames (grace period)
+            if self.no_face_frames > 5:
+                self.reset()
             return {
                 "face_detected": False,
                 "is_live": False,
@@ -175,9 +182,12 @@ class LivenessDetector:
         else:
             direction = "FORWARD"
 
+        time_since_last_blink = time.time() - self.last_blink_time
+        is_currently_live = (self.blink_count >= 1) and (time_since_last_blink < 3.5)
+
         return {
             "face_detected": True,
-            "is_live": self.blink_count >= 1,  # True once at least 1 blink is detected
+            "is_live": is_currently_live,  # True once at least 1 blink is detected
             "ear": avg_ear,
             "blink_count": self.blink_count,
             "head_direction": direction,
@@ -190,3 +200,4 @@ class LivenessDetector:
         self.eye_state = "OPEN"
         self.frames_closed = 0
         self.blink_count = 0
+        self.last_blink_time = 0.0

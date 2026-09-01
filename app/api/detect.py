@@ -51,6 +51,14 @@ def detect():
                 # "bbox": [x, y, w, h]
 
             })
+        if result["success"] and not is_live :
+            return jsonify({
+
+                "success": False,
+                "face":True,
+                "message": "Detected face is not live."
+
+            })
 
         return jsonify({
 
