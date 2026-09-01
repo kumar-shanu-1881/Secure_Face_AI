@@ -446,6 +446,5 @@ similarity_results.csv
 * Audit Logs
 * Admin Dashboard
 * Face Registration History
-* Multi-Face Detection
 * GPU Inference Support
 
