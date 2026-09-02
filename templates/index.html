@@ -80,12 +80,13 @@
                     stored biometric embeddings, providing industry-leading accuracy without the friction of passwords.
                 </p>
             </div>
-            <div class="card">
-                <h3>🛡 Robust Anti-Spoofing (Liveness)</h3>
+           <div class="card">
+                <h3>🛡️ Active Anti-Spoofing & Liveness</h3>
                 <p>
-                    Defend against presentation attacks with advanced Liveness Detection. Utilizing neural networks, the
-                    system actively distinguishes between a real, live human face and spoofing attempts such as printed
-                    photos, digital screens, or 3D masks.
+                    Defend against presentation attacks in real time. Using <strong>MediaPipe 468-point Face Mesh</strong>, 
+                    the system monitors <strong>Eye Aspect Ratio (EAR)</strong> to detect biological blinks and calculates 
+                    <strong>3D Head Pose (Yaw/Pitch)</strong> via Perspective-n-Point (PnP) math—effectively blocking printed photos, 
+                    screen replays, and static cutouts.
                 </p>
             </div>
             <div class="card">
@@ -126,8 +127,8 @@
             <div class="arrow">→</div>
             <div class="step">
                 <div class="circle">3</div>
-                <h3>Validation Gate</h3>
-                <p>Enforce single-face, liveness, &amp; front-facing rules (350ms loop).</p>
+                <h3>Liveness &amp; Anti-Spoof Gate</h3>
+                <p>Continuous validation of real-time eye blinks (EAR) and 3D head angle before granting access.</p>
             </div>
             <div class="arrow">→</div>
             <div class="step">
@@ -215,14 +216,16 @@
                     <span class="tech-badge">Stateless</span>
                 </div>
             </div>
-            <div class="tech-card">
+           <div class="tech-card">
                 <h3>AI &amp; Computer Vision</h3>
                 <p><strong>InsightFace (Buffalo_L)</strong> for extracting 512D deep embeddings</p>
-                <p><strong>MediaPipe</strong> for ultra-fast, lightweight face tracking</p>
-                <p><strong>OpenCV &amp; NumPy</strong> for matrix transformations &amp; image processing</p>
+                <p><strong>MediaPipe Face Mesh</strong> for 468-landmark tracking &amp; EAR blink detection</p>
+                <p><strong>OpenCV solvePnP</strong> for 3D Head Pose Estimation (Yaw/Pitch/Roll)</p>
                 <div>
                     <span class="tech-badge">Deep Learning</span>
                     <span class="tech-badge">Biometrics</span>
+                    <span class="tech-badge">Anti-Spoofing (Liveness)</span>
+                    <span class="tech-badge">PnP 3D Pose</span>
                 </div>
             </div>
             <div class="tech-card">
@@ -250,9 +253,8 @@
             Our core engine relies on the acclaimed <strong>InsightFace</strong> library for generating highly accurate
             facial embeddings, providing enterprise-grade recognition performance even on standard hardware.
             <br /><br />
-            Coupled with secure NoSQL storage via <strong>MongoDB</strong> and continuous anti-spoofing evaluations,
-            SecureFace AI is built to provide trustworthy, passwordless identity verification for modern, secure web
-            applications.
+            Coupled with secure NoSQL storage via <strong>MongoDB</strong> and continuous <strong>EAR &amp; 3D Head Pose anti-spoofing checks</strong>,
+            SecureFace AI ensures only verified, live human beings can pass authentication, safeguarding against all static photo and digital replay attacks.
         </p>
     </section>
     <footer>

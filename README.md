@@ -1,5 +1,12 @@
 # 🔐 SecureFace AI
 
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-Framework-black?logo=flask)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Face%20Mesh-orange)
+![InsightFace](https://img.shields.io/badge/InsightFace-ArcFace-red)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
+![License](https://img.shields.io/badge/License-MIT-brightgreen)
+
 A real-time **Face Authentication System** built using **Flask**, **MediaPipe**, **InsightFace (ArcFace)**, and **MongoDB**. SecureFace AI authenticates users using both traditional credentials and biometric facial recognition for enhanced security.
 
 ---
@@ -27,6 +34,7 @@ A real-time **Face Authentication System** built using **Flask**, **MediaPipe**,
 - 😊 Face Detection using MediaPipe
 - 🧠 Face Recognition using InsightFace (ArcFace)
 - 📐 512-D Face Embeddings
+- 🛡️ Active Anti-Spoofing & Liveness Detection
 - 📊 Cosine Similarity & Euclidean Distance Matching
 - 🔍 Face Detection Preview Page
 - 🆚 Face Similarity Comparison Tool
@@ -121,7 +129,7 @@ SecureFace AI
 │   │   ├── face_detector.py
 │   │   ├── get_embedings.py
 │   │   ├── check_similarity.py
-│   │   └── anti_spoof.py (Future)
+│   │   └── anti_spoofing.py 
 │   │
 │   ├── db
 │   │   ├── mongodb.py
@@ -167,9 +175,12 @@ User → Capture Face → MediaPipe Face Detection → Face Crop
 
 ### Login Flow
 ```
-User → Capture Live Face → MediaPipe Detection → Generate Face Embedding
-     → Verify Email → Verify User ID → Verify Password
-     → Compare Face Embeddings → Authentication Success → Dashboard
+User → Capture Live Stream → MediaPipe Face Detection
+     → Liveness & Anti-Spoof Gate (EAR Blink + 3D Pose)
+     ├── Failed ──► Reject (Spoof / Inactive Detected)
+     └── Passed ──► InsightFace (ArcFace 512-D Embedding)
+                  → Vector Similarity Verification (Cosine + Euclidean)
+                  → Scrypt Password Check → Session Created → Dashboard
 ```
 
 ### Face Recognition Pipeline
@@ -213,6 +224,17 @@ The system compares two facial embeddings using:
 Authentication succeeds only if **both** similarity metrics satisfy predefined thresholds.
 
 ---
+
+## 🛡️ Active Anti-Spoofing & Liveness Detection
+
+To eliminate presentation attacks (printed photos, video replays, mobile screens), SecureFace AI incorporates a zero-GPU liveness verification layer before running biometric matching:
+
+- **Eye Aspect Ratio (EAR) State Machine**: Tracks 6 facial landmarks per eye using MediaPipe Face Mesh. A deterministic Finite State Machine validates the complete biological blink trajectory ($\text{OPEN} \rightarrow \text{CLOSED} \rightarrow \text{OPEN}$) within a physiological window of 30ms–330ms.
+- **3D Head Pose Estimation (PnP)**: Maps 2D landmark coordinates to a canonical 3D human head model using OpenCV's `solvePnP` and Euler angle decomposition (`RQDecomp3x3`) to calculate real-time **Yaw, Pitch, and Roll**.
+- **Temporal Anti-Tamper Engine**: 
+  - 4.0-second time-decay window on verified liveness events.
+  - Multi-frame dropout grace period to withstand network jitter over HTTP.
+  - Instant state reset on face occlusions or identity swaps.
 
 ## 🔒 Security Features
 
@@ -354,7 +376,7 @@ LFW Dataset → Generate Face Embeddings → Create Verification Pairs
 
 **1. Clone Repository**
 ```bash
-git clone https://github.com/yourusername/SecureFace-AI.git
+git clone https://github.com/kumar-shanu-1881/Secure_Face_AI.git
 cd SecureFace-AI
 ```
 
@@ -396,7 +418,6 @@ Application will run at: `http://127.0.0.1:10000`
 
 ## 📈 Future Improvements
 
-- Anti-Spoof Detection (MiniFASNet)
 - JWT Authentication
 - PostgreSQL Support
 - Qdrant Vector Database
