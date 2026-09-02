@@ -43,6 +43,7 @@ class LivenessDetector:
         self.frames_closed = 0
         self.blink_count = 0
         self.last_blink_time = 0.0
+        self.no_face_frames = 0
 
     def _get_distance(self, pt1, pt2):
         # Simple Pythagorean distance between two 2D points.
